@@ -56,9 +56,12 @@
 								</div>
 								<div class="pull-left">
 									<div class="form-group">
-										<label for="voucher">Nhập mã giảm giá:</label>
-										<input type="text" class="form-control" id="voucher" ng-model="voucher.voucherCode"
-											   ng-model-options="{ debounce: 500 }"	   ng-change="voucher.saveVoucherCode()">
+										<label for="voucher">Chọn mã giảm giá:</label>
+										<select class="form-control" id="voucher" ng-model="voucher.voucherCode" ng-model-options="{ debounce: 500 }" ng-change="voucher.saveVoucherCode()">
+											<option th:each="item : ${vouchers}" th:value="${item.voucherName}" th:text="${item.voucherName}"></option>
+										</select>
+<!--										<input type="text" class="form-control" id="voucher" ng-model="voucher.voucherCode"-->
+<!--											   ng-model-options="{ debounce: 500 }"	   ng-change="voucher.saveVoucherCode()">-->
 										<div ng-if="voucher.errorMessage !== ''" class="error-message">{{ voucher.errorMessage }}</div>
 
 									</div>
@@ -73,6 +76,10 @@
 											<td class="text-right"> {{cart.amount1 | number:0}} Đ</td>
 										</tr>
 										<tr>
+											<td class="text-right"><strong>Phí ship :</strong></td>
+											<td class="text-right"> 24.000 Đ</td>
+										</tr>
+										<tr>
 											<td class="text-right"><strong>Khuyến mãi</strong></td>
 											<td class="text-right"> {{cart.amount2 | number:0}} Đ</td>
 										</tr>
@@ -82,7 +89,7 @@
 										</tr>
 										<tr>
 											<td class="text-right"><strong>Còn:</strong></td>
-											<td class="text-right"> {{cart.amount-voucher.voucherPrice | number:0}} Đ</td>
+											<td class="text-right"> {{cart.amount-voucher.voucherPrice + 24000 | number:0}} Đ</td>
 										</tr>
 										
 									</tbody>

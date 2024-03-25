@@ -24,22 +24,32 @@ import com.poly.service.ProductService;
 public class CategoryRestController {
 	@Autowired
 	CategoryService categoryService;
+
+
 	@GetMapping()
 	public List<Category> getAll() {
 		return categoryService.findAll();
 	}
+
+
 	@GetMapping("{category_id}")
 	public Category getOne(@PathVariable("category_id")Integer category_id) {
 		return categoryService.findById(category_id);
 	}
+
+
 	@PostMapping()
 	public Category create(@RequestBody Category category_id) {
 		return categoryService.create(category_id);
 	}
+
+
 	@PutMapping("{category_id}")
 	public Category put(@PathVariable("category_id")Integer category_id,@RequestBody Category category) {
 		return categoryService.update(category);
 	}
+
+
 	@DeleteMapping("{category_id}")
 	public void delete(@PathVariable("category_id")Integer category_id) {
 		categoryService.delete(category_id);

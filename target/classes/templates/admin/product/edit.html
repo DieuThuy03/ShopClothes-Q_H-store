@@ -104,6 +104,31 @@
 												</div>
 											</select>
 										</div>
+
+										<!--	--------------------Size------------------------------------------->
+										<div class="form-group col-sm-6">
+											<div>Size</div>
+											<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+
+												<div class="form-group selectpicker show-tick" th:each="s,state:${size}">
+													<option th:value="${s.Size_id}" >[[${s.name}]]</option>
+												</div>
+											</select>
+										</div>
+
+										<!--	--------------------Material------------------------------------------->
+										<div class="form-group col-sm-6">
+											<div>Chất Liêu</div>
+											<select name="material.Material_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+
+												<div class="form-group selectpicker show-tick" th:each="m,state:${materials}">
+													<option th:value="${m.Material_id}" >[[${m.name}]]</option>
+												</div>
+											</select>
+										</div>
+
+
+
 										<div class="form-group col-sm-6">
 											<div>Thương hiệu</div>
 											<!-- 								<inputxt" name="trademark.Name" th:value="${pro.trademark.Name}" -->
@@ -124,31 +149,31 @@
 											<input type="text" name="Description"
 												th:value="${pro.Description}" class="form-control">
 										</div>
-										<div class="form-group col-sm-6">
-											<div>Chip</div>
-											<input type="text" name="Chip" th:value="${pro.Chip}"
-												class="form-control">
-										</div>
-										<div class="form-group col-sm-6">
-											<div>Ram</div>
-											<input type="text" name="Ram" th:value="${pro.Ram}"
-												class="form-control">
-										</div>
-										<div class="form-group col-sm-6">
-											<div>Rom</div>
-											<input type="text" name="Rom" th:value="${pro.Rom}"
-												class="form-control">
-										</div>
-										<div class="form-group col-sm-6">
-											<div>Màn hình</div>
-											<input type="text" name="Resolution"
-												th:value="${pro.Resolution}" class="form-control">
-										</div>
-										<div class="form-group col-sm-6">
-											<div>Pin</div>
-											<input type="text" name="Pin" th:value="${pro.Pin}"
-												class="form-control">
-										</div>
+<!--										<div class="form-group col-sm-6">-->
+<!--											<div>Chip</div>-->
+<!--											<input type="text" name="Chip" th:value="${pro.Chip}"-->
+<!--												class="form-control">-->
+<!--										</div>-->
+<!--										<div class="form-group col-sm-6">-->
+<!--											<div>Ram</div>-->
+<!--											<input type="text" name="Ram" th:value="${pro.Ram}"-->
+<!--												class="form-control">-->
+<!--										</div>-->
+<!--										<div class="form-group col-sm-6">-->
+<!--											<div>Rom</div>-->
+<!--											<input type="text" name="Rom" th:value="${pro.Rom}"-->
+<!--												class="form-control">-->
+<!--										</div>-->
+<!--										<div class="form-group col-sm-6">-->
+<!--											<div>Màn hình</div>-->
+<!--											<input type="text" name="Resolution"-->
+<!--												th:value="${pro.Resolution}" class="form-control">-->
+<!--										</div>-->
+<!--										<div class="form-group col-sm-6">-->
+<!--											<div>Pin</div>-->
+<!--											<input type="text" name="Pin" th:value="${pro.Pin}"-->
+<!--												class="form-control">-->
+<!--										</div>-->
 										<div class="form-group col-sm-6">
 											<div>Khuyến mãi</div>
 											<input type="number" name="Distcount"
@@ -201,10 +226,11 @@
 									<button type="submit" class="btn btn-round btn-info">
 										<span class="glyphicon glyphicon-check"></span> Cập nhập
 									</button>
-									<a th:href="@{|/admin/product/delete/form/${pro.Product_id}|}"
-										class='btn btn-round btn-danger'><span
-										class="glyphicon glyphicon-remove"></span> Xóa</a> <a
-										tH:href=@{/admin/product/detail} class="btn btn-round btn-default"><span
+<!--									<a th:href="@{|/admin/product/delete/form/${pro.Product_id}|}"-->
+<!--										class='btn btn-round btn-danger'><span-->
+<!--										class="glyphicon glyphicon-remove"></span> Xóa</a> <a-->
+<!--										tH:href=@{/admin/product/detail} class="btn btn-round btn-default">-->
+									<span
 										class="glyphicon glyphicon-refresh"></span>Làm mới</a> <i
 										th:utext="${message}"></i>
 								</div>

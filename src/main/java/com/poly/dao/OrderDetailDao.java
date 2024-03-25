@@ -24,4 +24,10 @@ public interface OrderDetailDao extends JpaRepository<OrderDetail, Integer>{
 
 	@Query(value="select *  from OrderDetails where Order_id = :order_id" ,nativeQuery = true)
 	List<OrderDetail> findByOrder(@Param("order_id") Integer idOrder);
+
+	@Query("SELECT o FROM OrderDetail o WHERE o.Orderdetail_id = ?1")
+	OrderDetail findOneByOrderDetailId(Integer orderid);
+
+	@Query("SELECT o FROM OrderDetail o WHERE o.order.Order_id = ?1 and o.product.Product_id = ?2")
+	OrderDetail findOneByOrderIdAndProductID(Integer orderID, Integer productID);
 }

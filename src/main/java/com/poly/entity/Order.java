@@ -42,6 +42,8 @@ public class Order implements Serializable{
 	Double  money_give= 0.0;
 	Double  money_send= 0.0;
 	Double voucher_price =  0.0;
+	String reason;
+	String Card_id;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@Column(name = "Createdate")

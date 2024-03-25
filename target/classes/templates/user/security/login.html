@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{user/acc/index ::dynamic(~{::main})}">
 <main>
+	<div th:if="${login != null}">
+		<script>
+			localStorage.removeItem('cart');
+			document.location.href = "/home/index";
+		</script>
+	</div>
 	<form th:action="@{/security/login}" method="post"
 		class="col-sm-6 col-sm-offset-3">
 		<div  class="product-thumb">
@@ -103,6 +109,10 @@
 		<br>
 		</div>
 	</form>
-
+	<div th:if="${logout != null}">
+		<script>
+			localStorage.removeItem('cart');
+		</script>
+	</div>
 </main>
 </html>

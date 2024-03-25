@@ -3,6 +3,7 @@ package com.poly.controller.user;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,23 +26,29 @@ public class SecurityController {
 		model.addAttribute("message","Để tiếp tục, hãy đăng nhập vào GoalShop.");
 		return "user/security/login";
 	}
+
 	@RequestMapping("/security/login/success")
 	public String loginSuccess( Model model) {
 		model.addAttribute("message","Đăng nhập thành công");
+		model.addAttribute("login","Đăng nhập thành công");
 		return "user/security/login";
 	}
+
 	@RequestMapping("/security/login/erorr")
 	public String loginErorr( Model model) {
 		model.addAttribute("message","Tài khoản chưa kích hoạt hoặc sai thông tin tài khoản");
 		return "user/security/login";
 	}
+
 	@RequestMapping("/security/unauthoried")
 	public String unauthoried( ) {
 		return "admin/security/404";
 	}
+
 	@RequestMapping("/security/logoff/success")
 	public String logoff( Model model) {
-		model.addAttribute("message","Đăng xuất thành công ");
+		model.addAttribute("message","Đăng xuất thành công");
+		model.addAttribute("logout","Đăng xuất thành công");
 		return "user/security/login";
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.poly.dtos.BillDTO;
 import com.poly.dtos.FileDTO;
+import com.poly.entity.Account;
 import com.poly.entity.OrderDetail;
 import com.poly.entity.Voucher;
 import com.poly.exceptions.MoneyNotEnoughException;
@@ -12,6 +13,7 @@ import com.poly.service.OrderDetailService;
 import com.poly.service.ReportService;
 import com.poly.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -94,5 +96,32 @@ public class OrderRestController {
 	@PutMapping("/rest/orders/{id}")
 	public Order put(@PathVariable("id")Integer id,@RequestBody Order order) {
 		return  orderService.update(order);
+	}
+
+	@DeleteMapping("/rest/orders/{id}")
+	public Order delete(@PathVariable("id")Integer id) {
+		orderService.deleteById(id);
+		return new Order();
+	}
+
+	@PostMapping("/rest/orderpending/edit/{order_id}")
+	public FileDTO updateOrderPendding(Model model, @PathVariable("order_id") Integer order_id, @RequestBody Order ord) throws Throwable {
+		Order old = orderService.findById(order_id);
+		Account account = old.getAccount();
+		account.setFullname(ord.getAccount().getFullname());
+		old.setPhone(ord.getPhone());
+		old.setMoney_give(ord.getMoney_give());
+		old.setDescription(ord.getDescription());
+		old.setAddress(ord.getAddress());
+		old.setStatus(3);
+		orderService.update(old);
+		var billDTO = BillDTO.builder().order(old).build();
+		List<OrderDetail> orderDetails = orderDetailService.findByOrderID(old.getOrder_id());
+		billDTO.setOrderDetails(orderDetails);
+		if(billDTO.getOrder().getMoney_give()<(billDTO.getOrder().getPrice()-billDTO.getOrder().getVoucher_price()))
+			throw new MoneyNotEnoughException("Money not enough");
+		String pdfPath= reportService.createPdf(billDTO);
+		FileDTO fileDTO = new FileDTO(pdfPath);
+		return fileDTO;
 	}
 }

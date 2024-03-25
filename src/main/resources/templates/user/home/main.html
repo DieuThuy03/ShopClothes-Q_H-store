@@ -37,12 +37,19 @@
 										<a href="#" title="Casual Shirt With Ruffle Hem"
 											th:utext="${l.name}" class="cdt-product__name"></a>
 									</h6>
-									<div class="rating">
-										<span class="rating1" title="RAM "> [[${l.ram}]] </span> <span
-											class="rating2" title="Bộ nhớ trong "> [[${l.rom}]] </span>
-									</div>
-									<span class="price"><span class="amount">[[${#numbers.formatDecimal(l.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ
-									</span> </span>
+<!--									<div class="rating">-->
+<!--										<span class="rating1" title="RAM "> [[${l.ram}]] </span> <span-->
+<!--											class="rating2" title="Bộ nhớ trong "> [[${l.rom}]] </span>-->
+<!--									</div>-->
+									<span class="price">
+										<span th:if="${l.distcount} > 0">
+											<span class="amount" style="margin-left: 5px; text-decoration: line-through;">[[${#numbers.formatDecimal(l.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+											<span class="amount text-danger">[[${#numbers.formatDecimal(l.unit_price * (100 - l.distcount) / 100, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+										</span>
+										<span th:unless="${l.distcount} > 0">
+											<span class="amount">[[${#numbers.formatDecimal(l.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+										</span>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -96,12 +103,19 @@
 										<a href="#" title="Casual Shirt With Ruffle Hem"
 											th:utext="${d.name}" class="cdt-product__name"></a>
 									</h6>
-									<div class="rating">
-										<span class="rating1" title="RAM "> [[${d.ram}]] </span> <span
-											class="rating2" title="Bộ nhớ trong "> [[${d.rom}]] </span>
-									</div>
-									<span class="price"><span class="amount">[[${#numbers.formatDecimal(d.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ
-									</span> </span>
+<!--									<div class="rating">-->
+<!--										<span class="rating1" title="RAM "> [[${d.ram}]] </span> <span-->
+<!--											class="rating2" title="Bộ nhớ trong "> [[${d.rom}]] </span>-->
+<!--									</div>-->
+									<span class="price">
+										<span th:if="${d.distcount} > 0">
+											<span class="amount" style="margin-left: 5px; text-decoration: line-through;">[[${#numbers.formatDecimal(d.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+											<span class="amount text-danger">[[${#numbers.formatDecimal(d.unit_price * (100 - d.distcount) / 100, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+										</span>
+										<span th:unless="${d.distcount} > 0">
+											<span class="amount">[[${#numbers.formatDecimal(d.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+										</span>
+									</span>
 								</div>
 							</div>
 						</div>

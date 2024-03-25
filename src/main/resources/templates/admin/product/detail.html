@@ -101,12 +101,44 @@
 								</div>
 							</select>
 							</div>
+                               <!--	--------------------Size------------------------------------------->
+							<div class="form-group col-sm-6">
+								<div>Size</div>
+								<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+
+									<div class="form-group selectpicker show-tick" th:each="s,state:${size}">
+										<option th:value="${s.Size_id}" >[[${s.name}]]</option>
+									</div>
+								</select>
+							</div>
+
+							<!--	--------------------Material------------------------------------------->
+							<div class="form-group col-sm-6">
+								<div>Chất Liêu</div>
+								<select name="material.Material_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+
+									<div class="form-group selectpicker show-tick" th:each="m,state:${materials}">
+										<option th:value="${m.Material_id}" >[[${m.name}]]</option>
+									</div>
+								</select>
+							</div>
+							<!-------------------Colors------------------------------>
+							<div class="form-group col-sm-6">
+								<div>Màu sắc</div>
+								<select name="color.Color_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+
+									<div class="form-group selectpicker show-tick" th:each="c,state:${colors}">
+										<option th:value="${c.Color_id}" >[[${c.name}]]</option>
+									</div>
+								</select>
+							</div>
+                             <!------------------------------------------------->
 							<div class="form-group col-sm-6">
 								<div>Thương hiệu</div>
 <!-- 								<inputxt" name="trademark.Name" th:value="${pro.trademark.Name}" -->
 <!-- 									class="form type="te-control"> -->
 							<select name="trademark.Trademark_id" data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
-							
+
 							<div class="form-group selectpicker show-tick" th:each="t,state:${trads}">
 							<option th:value="${t.Trademark_id}" >[[${t.Name}]]</option>
 							</div>
@@ -117,38 +149,38 @@
 								<input type="text" name="Description" th:value="${pro.Description}"
 									class="form-control" required>
 							</div>
-							<div class="form-group col-sm-6">
-								<div>Chip</div>
-								<input type="text" name="Chip" th:value="${pro.Chip}"
-									class="form-control" required>
-							</div>
-							<div class="form-group col-sm-6">
-								<div>Ram</div>
-								<input type="text" name="Ram" th:value="${pro.Ram}"
-									class="form-control" required>
-<!--								<select id="Ram">-->
-<!--									<option value="volvo">4GB</option>-->
-<!--									<option value="saab">8GB</option>-->
-<!--									<option value="vw">16GB</option>-->
-<!--									<option value="audi" selected>32GB</option>-->
-<!--									<option value="audi" >64GB</option>-->
-<!--								</select>-->
-							</div>
-							<div class="form-group col-sm-6">
-								<div>Bộ nhớ</div>
-								<input type="text" name="Rom" th:value="${pro.Rom}"
-									class="form-control" required>
-							</div>
-							<div class="form-group col-sm-6">
-								<div>Màn hình</div>
-								<input type="text" name="Resolution" th:value="${pro.Resolution}"
-									class="form-control" required>
-							</div>
-							<div class="form-group col-sm-6">
-								<div>Pin</div>
-								<input type="text" name="Pin" th:value="${pro.Pin}"
-									class="form-control" required>
-							</div>
+<!--							<div class="form-group col-sm-6">-->
+<!--								<div>Chip</div>-->
+<!--								<input type="text" name="Chip" th:value="${pro.Chip}"-->
+<!--									class="form-control" required>-->
+<!--							</div>-->
+<!--							<div class="form-group col-sm-6">-->
+<!--								<div>Ram</div>-->
+<!--								<input type="text" name="Ram" th:value="${pro.Ram}"-->
+<!--									class="form-control" required>-->
+<!--&lt;!&ndash;								<select id="Ram">&ndash;&gt;-->
+<!--&lt;!&ndash;									<option value="volvo">4GB</option>&ndash;&gt;-->
+<!--&lt;!&ndash;									<option value="saab">8GB</option>&ndash;&gt;-->
+<!--&lt;!&ndash;									<option value="vw">16GB</option>&ndash;&gt;-->
+<!--&lt;!&ndash;									<option value="audi" selected>32GB</option>&ndash;&gt;-->
+<!--&lt;!&ndash;									<option value="audi" >64GB</option>&ndash;&gt;-->
+<!--&lt;!&ndash;								</select>&ndash;&gt;-->
+<!--							</div>-->
+<!--							<div class="form-group col-sm-6">-->
+<!--								<div>Bộ nhớ</div>-->
+<!--								<input type="text" name="Rom" th:value="${pro.Rom}"-->
+<!--									class="form-control" required>-->
+<!--							</div>-->
+<!--							<div class="form-group col-sm-6">-->
+<!--								<div>Màn hình</div>-->
+<!--								<input type="text" name="Resolution" th:value="${pro.Resolution}"-->
+<!--									class="form-control" required>-->
+<!--							</div>-->
+<!--							<div class="form-group col-sm-6">-->
+<!--								<div>Pin</div>-->
+<!--								<input type="text" name="Pin" th:value="${pro.Pin}"-->
+<!--									class="form-control" required>-->
+<!--							</div>-->
 							<div class="form-group col-sm-6">
 								<div>Khuyến mãi</div>
 								<input type="number" name="Distcount" th:value="${pro.Distcount}"

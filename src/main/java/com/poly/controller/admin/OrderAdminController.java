@@ -6,20 +6,21 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.poly.dtos.BillDTO;
+import com.poly.entity.Account;
 import com.poly.service.OrderDetailService;
+import com.poly.service.OrderService;
+import com.poly.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.poly.dao.OrderDao;
@@ -43,6 +44,12 @@ public class OrderAdminController {
 	ProductDao prodao;
 	@Autowired
 	JavaMailSender javaMailSender;
+	@Autowired
+	OrderService orderService;
+
+	@Autowired
+	ProductService productService;
+
 	@GetMapping("/admin/order/list")
 	public String index(Model model, HttpServletRequest request, RedirectAttributes redirect) {
 		request.getSession().setAttribute("orderlist", null);
@@ -300,5 +307,54 @@ public class OrderAdminController {
 		javaMailSender.send(msg);
 		model.addAttribute("message", "Gửi mail thành công");
 		return "redirect:/admin/order/edit?order_id=" + order_id;
+	}
+
+	@GetMapping("/admin/orderpending/edit/{order_id}")
+	public String orderDetailPeding(Model model, @PathVariable("order_id") Integer order_id) {
+
+		Order ListOrder = odao.findById(order_id).get();
+		List<OrderDetail> ListOrderDetail = service.findByOrderID(order_id);
+
+		model.addAttribute("ord", ListOrder);
+		model.addAttribute("odetail", ListOrderDetail);
+		model.addAttribute("message", "Thao tác thành công");
+		return "admin/order/editpending";
+	}
+
+	@PostMapping("/admin/orderpending/edit/{order_id}")
+	public String orderDetailPeding(Model model, @PathVariable("order_id") Integer order_id, Order ord) {
+		Order old = orderService.findById(order_id);
+		Account account = old.getAccount();
+		account.setFullname(ord.getAccount().getFullname());
+		old.setPhone(ord.getPhone());
+		old.setMoney_give(ord.getMoney_give());
+		old.setDescription(ord.getDescription());
+		old.setAddress(ord.getAddress());
+		old.setStatus(3);
+		orderService.update(old);
+		return "redirect:/admin/order/edit?order_id=" + order_id;
+	}
+
+	@GetMapping("/admin/orderpending/edit/{order_id}/add")
+	public String addOrderDetailPeding(Model model,
+									   @PathVariable("order_id") Integer order_id,
+									   @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber) {
+		if(pageNumber < 0){
+			return "redirect:/admin/orderpending/edit/" + order_id + "/add?pageNumber=" + (pageNumber + 1);
+		}
+		long countPage = prodao.findAll().stream().count() % 15 == 0 ? prodao.findAll().stream().count()/15 : prodao.findAll().stream().count()/15 + 1;
+		if(pageNumber > countPage - 1){
+			return "redirect:/admin/orderpending/edit/" + order_id + "/add?pageNumber=" + (pageNumber - 1);
+		}
+		Order ListOrder = odao.findById(order_id).get();
+		List<OrderDetail> ListOrderDetail = service.findByOrderID(order_id);
+		Page<Product> products = productService.findAllProductsWithCondition(pageNumber, 15,"");
+		model.addAttribute("ord", ListOrder);
+		model.addAttribute("odetail", ListOrderDetail);
+		model.addAttribute("products", products);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("countPage", countPage);
+		model.addAttribute("message", "Thao tác thành công");
+		return "admin/order/addpending";
 	}
 }

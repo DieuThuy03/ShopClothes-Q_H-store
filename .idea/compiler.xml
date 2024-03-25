@@ -9,6 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="GoalShop-1" />
         <module name="DATN" />
+        <module name="Mobie_Shop" />
+        <module name="testcuoi" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +18,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DATN" options="-parameters" />
       <module name="GoalShop-1" options="-parameters" />
+      <module name="Mobie_Shop" options="-parameters" />
+      <module name="testcuoi" options="-parameters" />
     </option>
   </component>
 </project>

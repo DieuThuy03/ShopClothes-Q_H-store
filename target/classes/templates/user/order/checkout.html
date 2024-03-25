@@ -23,26 +23,32 @@
 					</div>
 					<div class="form-group col-sm-6">
 						<div class="thongtin">Số điện thoại</div>
-						<input ng-model="order1.phone" class="form-control">
+						<input ng-model="order1.phone" class="form-control" id="phone">
 					</div>
 					<div class="form-group col-sm-6">
 						<div class="thongtin">Tổng tiền</div>
-						<div class="form-control" readonly> {{cart.amount-voucher.voucherPrice | number:0}} Đ</div>
+						<div class="form-control" readonly> {{cart.amount-voucher.voucherPrice + 24000 | number:0}} Đ</div>
 					</div>
 				</div>
+
+<!--				<div class="row">-->
+<!--					<div class="form-group col-sm-12">-->
+<!--						<div class="thongtin">Căn cước công dân</div>-->
+<!--						<input ng-model="order1.card_id"  class="form-control" id="cardId">-->
+<!--					</div>-->
+<!--				</div>-->
 				
 				<div class="row">
 					<div class="form-group col-sm-12">
 						<div class="thongtin">Địa chỉ giao hàng</div>
-						<textarea ng-model="order1.address"  class="form-control"></textarea>
+						<textarea ng-model="order1.address"  class="form-control" id="address"></textarea>
 					</div>
 				</div>
 			</div>
 			<div class="panel-footer ">
 				<div class="col-12 d-flex shopping-box text-center">
 				
-							<a type="button" class="ml-auto btn hvr-hover"
-								data-toggle="modal" data-target="#myModal">Thanh toán sau khi nhận hàng</a> <!-- Modal -->
+							<a type="button" id="payment" class="ml-auto btn hvr-hover">Thanh toán sau khi nhận hàng</a> <!-- Modal -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog">
 

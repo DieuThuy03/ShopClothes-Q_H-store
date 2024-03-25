@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MoneyNotEnoughException.class)
     public ResponseEntity<ResponseDTO<String>> handleMoneyNotEnoughException(MoneyNotEnoughException ex) {
-        ResponseDTO<String> response = new ResponseDTO<>(444,ex.getMessage(),"Money give not enough!");
+        ResponseDTO<String> response = new ResponseDTO<>(444,ex.getMessage(),"Tiền nhận từ khách không đủ!");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(QuantityNotEnoughException.class)
     public ResponseEntity<ResponseDTO<String>> handleQuantityNotEnoughException(QuantityNotEnoughException ex) {
-        ResponseDTO<String> response = new ResponseDTO<>(445,ex.getMessage(),"Money give not enough!");
+        ResponseDTO<String> response = new ResponseDTO<>(445,ex.getMessage(),"Tiền nhận từ khách không đủ!");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 

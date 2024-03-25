@@ -49,6 +49,32 @@ public class OrderDetailServiceImlq implements OrderDetailService {
 
 	}
 
+	@Override
+	public OrderDetail findOneByOrderDetailID(Integer orderDetailId) {
+		return dao.findOneByOrderDetailId(orderDetailId);
+	}
+
+	@Override
+	public void update(OrderDetail orderDetail) {
+		dao.save(orderDetail);
+	}
+
+	@Override
+	public void delete(Integer orderDetailId) {
+		dao.deleteById(orderDetailId);
+	}
+
+	@Override
+	public void add(OrderDetail orderDetail) {
+		orderDetail.setOrderdetail_id(null);
+		dao.save(orderDetail);
+	}
+
+	@Override
+	public OrderDetail findOneByOrderIDAndProductID(Integer orderId, Integer productID) {
+		return dao.findOneByOrderIdAndProductID(orderId, productID);
+	}
+
 	public void updateInformationProduct(Product product, ProductDetail detail , List<ImageProduct> images){
 		if(detail!=null){
 			product.setDetail(detail.getDetail());

@@ -74,6 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 .antMatchers("/admin/product/**").hasAnyRole("STAF","DIRE")
 		 .antMatchers("/admin/order/**").hasAnyRole("STAF","DIRE")
 		 .antMatchers("/admin/category/**").hasAnyRole("STAF","DIRE")
+		.antMatchers("/admin/size/**", "/admin/map/**", "/admin/post/**").hasAnyRole("STAF","DIRE")
+		.antMatchers("/admin/color/**", "/admin/map/**", "/admin/post/**").hasAnyRole("STAF","DIRE")
+		.antMatchers("/admin/material/**", "/admin/map/**", "/admin/post/**").hasAnyRole("STAF","DIRE")
 		 .antMatchers("/admin/trademark/**", "/admin/map/**", "/admin/post/**").hasAnyRole("STAF","DIRE")
 		 .antMatchers("/admin/char/**").hasRole("DIRE")
 		 .antMatchers("/admin/authority/**").hasRole("DIRE")
@@ -82,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// đăng nhập
 		http.formLogin().loginPage("/security/login/form")
 		.loginProcessingUrl("/security/login")
-		.defaultSuccessUrl("/home/index", false)
+		.defaultSuccessUrl("/security/login/success", false)
 		.failureUrl("/security/login/erorr");
 		http.rememberMe().tokenValiditySeconds(86400);
 		http.exceptionHandling().accessDeniedPage("/security/unauthoried");
@@ -120,7 +123,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		UserDetails user = User.withUsername(name).password(pe.encode(password)).roles("GUEST").build();
 		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-
 	}
 
 }

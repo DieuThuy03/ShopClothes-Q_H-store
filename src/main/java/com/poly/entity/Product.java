@@ -61,12 +61,28 @@ public class Product implements Serializable {
 	Boolean Status = false;
 	Boolean Special = false;
 	Boolean Lastest = false;
+
 	@ManyToOne
 	@JoinColumn(name = "Category_id")
 	Category category;
+
+
 	@ManyToOne
 	@JoinColumn(name = "Trademark_id")
 	Trademark trademark;
+
+	@ManyToOne
+	@JoinColumn(name = "Size_id")
+	Size size;
+
+	@ManyToOne
+	@JoinColumn(name = "Color_id")
+	Color color;
+
+	@ManyToOne
+	@JoinColumn(name = "Material_id")
+	Material material;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails;

@@ -193,7 +193,6 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
         saveToLocalStorage() {
             var json = JSON.stringify(angular.copy(this.items));
             localStorage.setItem("cart", json);
-
         },
         loadFromLocalStorage() {
             var json = localStorage.getItem("cart");
@@ -209,7 +208,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	        address: "",
 	        phone : "",
 	        status : 0,
-	         intent: 'sale',
+	        intent: 'sale',
 	        method: 'Paypal',
 	        currency: 'USD',
 	        description: 'Đã thanh toán',
@@ -226,12 +225,11 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	            });
 	        },
 	        purchase() {
-
 	            var order = angular.copy(this);
 	            $http.post("/rest/orders", order).then(resp => {
 	                alert("Đặt hàng thành công");
 	                $scope.cart.clear();
-                    // $scope.voucher.clearVoucher;
+//                     $scope.voucher.clearVoucher;
 	                location.href = "/order/detail/" + resp.data.order_id;
 	            }).catch(error => {
 	                alert("Đặt hàng thất bại");
@@ -239,8 +237,20 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	            })
 	        },
 	        purchase1() {
+                if($scope.order.validatePhone($('#phone').val()) != ""){
+                    alert(validatePhone($('#phone').val()));
+                    return;
+                }
+                if($scope.order.validateAddress($('#address').val()) != ""){
+                    alert(validateAddress($('#address').val()));
+                    return;
+                }
 	            var order = angular.copy(this);
-	            $http.post("/rest/orders", order).then(resp => {
+                order.price = order.price + 24000;
+	            $http.post("/rest/orders?code="+$scope.voucher.voucherCode, order).then(resp => {
+                    alert("Đang chuyển đến trang thanh toán");
+                    $scope.cart.clear();
+                    document.getElementById("form-pay").submit();
 	            }).catch(error => {
 	                alert("Đặt hàng thất bại");
 	                console.log(error)
@@ -248,7 +258,22 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	        },
 	        purchase2() {
 	            $scope.cart.clear();
-	        }
+	        },
+           validatePhone(text){
+               if (text == null || text == undefined || text.length == 0) {
+                   return "Vui lòng nhập số điện thoại";
+               }
+               var regex = /^(0[3|5|7|8|9])+([0-9]{8})\b$/i;
+               if (text.match(regex))
+                   return "";
+               return "SĐT không hợp lệ, phải gồm 10 chữ số và bắt đầu bằng 03, 05, 07, 08 hoặc 09";
+           },
+           validateAddress(text){
+               if (text == null || text == undefined || text.length == 0) {
+                   return "Vui lòng nhập địa chỉ giao hàng";
+               }
+               return "";
+           }
 	    }
 	       $scope.order1 = {
 	        createDate: new Date(),
@@ -260,6 +285,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	        method: 'Trả sau',
 	        currency: 'VND',
 	        description: 'Chưa thanh toán',
+            card_id: null,
 
 	        price : $scope.cart.amount,
 	        account: { username: $("#username").text()},
@@ -274,6 +300,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 	        },
 	        purchase() {
 	            var order = angular.copy(this);
+	            order.price = order.price + 24000;
                 $http.post("/rest/orders?code="+$scope.voucher.voucherCode, order).then(resp => {
                     alert("Đặt hàng thành công");
                     $scope.cart.clear();

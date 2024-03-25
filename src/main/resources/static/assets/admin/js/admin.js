@@ -346,6 +346,13 @@ app.controller("shopping-cart-sell-ctrl", function($scope, $http) {
                 } else alert("Đặt hàng thất bại");
                 console.log(error)
             })
+        },
+        cancel() {
+            if(confirm("Bạn có chắc chắn muốn hủy đơn hay không?")){
+                $http.delete("/rest/orders/" + this.order_id);
+                alert("Hủy đơn hàng thành công!");
+                location.reload();
+            }
         }
     }
     $scope.order = {
@@ -386,25 +393,26 @@ app.controller("shopping-cart-sell-ctrl", function($scope, $http) {
           $scope.voucher.isValid =0;
         },
         viewDetailOrderPending(id){
-            $http.get("/rest/orders/pending/"+id).then(resp =>{
-                $scope.orderPendingDetail.createDate = resp.data.createDate;
-                $scope.orderPendingDetail.address = resp.data.address.trim();
-                $scope.orderPendingDetail.phone = resp.data.phone.trim();
-                $scope.orderPendingDetail.status = resp.data.status;
-                $scope.orderPendingDetail.intent = resp.data.intent;
-                $scope.orderPendingDetail.method = resp.data.method;
-                $scope.orderPendingDetail.currency = resp.data.currency;
-                $scope.orderPendingDetail.description = resp.data.description.trim();
-                $scope.orderPendingDetail.voucher_price = resp.data.voucher_price;
-                $scope.orderPendingDetail.money_give = resp.data.money_give;
-                $scope.orderPendingDetail.money_send = resp.data.money_send;
-                $scope.orderPendingDetail.price = resp.data.price;
-                $scope.orderPendingDetail.account = resp.data.account;
-                $scope.orderPendingDetail.order_id = resp.data.order_id;
-                console.log(resp.data)
-                $("#modal-order-pending").modal("hide")
-                $("#modal-order-pending-detail").modal("show")
-            })
+            document.location.href = "/admin/orderpending/edit/" + id;
+            // $http.get("/rest/orders/pending/"+id).then(resp =>{
+            //     $scope.orderPendingDetail.createDate = resp.data.createDate;
+            //     $scope.orderPendingDetail.address = resp.data.address.trim();
+            //     $scope.orderPendingDetail.phone = resp.data.phone.trim();
+            //     $scope.orderPendingDetail.status = resp.data.status;
+            //     $scope.orderPendingDetail.intent = resp.data.intent;
+            //     $scope.orderPendingDetail.method = resp.data.method;
+            //     $scope.orderPendingDetail.currency = resp.data.currency;
+            //     $scope.orderPendingDetail.description = resp.data.description.trim();
+            //     $scope.orderPendingDetail.voucher_price = resp.data.voucher_price;
+            //     $scope.orderPendingDetail.money_give = resp.data.money_give;
+            //     $scope.orderPendingDetail.money_send = resp.data.money_send;
+            //     $scope.orderPendingDetail.price = resp.data.price;
+            //     $scope.orderPendingDetail.account = resp.data.account;
+            //     $scope.orderPendingDetail.order_id = resp.data.order_id;
+            //     console.log(resp.data)
+            //     $("#modal-order-pending").modal("hide")
+            //     $("#modal-order-pending-detail").modal("show")
+            // })
         },
         showOrderPending(){
             $("#modal-checkout").modal("hide")
@@ -457,44 +465,72 @@ app.controller("shopping-cart-sell-ctrl", function($scope, $http) {
 
         },
         purchase() {
-
+            let thoiGianHienTai = new Date();
+            let gio = thoiGianHienTai.getHours();
+            let phut = thoiGianHienTai.getMinutes();
+            let giay = thoiGianHienTai.getSeconds();
+            let chuoiThoiGian = gio + '_' + phut + '_' + giay;
+            let ngay = thoiGianHienTai.getDate();
+            let thang = thoiGianHienTai.getMonth() + 1;
+            let nam = thoiGianHienTai.getFullYear();
+            let chuoiThoiGianDayDu = ngay + '_' + thang + '_' + nam + '_' + chuoiThoiGian;
+            var account = {
+                fullname: document.getElementById("fullName").value,
+                phone: document.getElementById("phone").value,
+                username: "Anonymous" + "_" + chuoiThoiGianDayDu,
+                active: false
+            }
             var order = angular.copy(this);
             order.price = $scope.cart.amount;
-            order.account.username = $scope.cart.username?$scope.cart.username:"Anonymous";
+            order.account.username = "Anonymous" + "_" + chuoiThoiGianDayDu;
             order.voucher_price = $scope.voucher.voucherPrice;
-            $http.post("/rest/orders/sell?code="+$scope.voucher.voucherCode, order).then(resp => {
-                alert("Đặt hàng thành công");
-                $scope.cart.clear();
-                this.clear();
-                $("#modal-checkout").modal("hide")
-                $scope.cart.printBill(resp.data.pathFile)
-                $scope.voucher.voucherPrice=0
-                $scope.voucher.clearVoucher();
-                $scope.voucher.voucherCode = "";
-                $scope.order.money_give = 0
-                $scope.order.money_send = 0
+            $.ajax({
+                url: "/rest/accounts2",
+                type: 'POST',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify(account),
+                success: function(data) {
+                    $http.post("/rest/orders/sell?code="+$scope.voucher.voucherCode, order).then(resp => {
+                        alert("Đặt hàng thành công");
+                        $scope.cart.clear();
+                        this.clear();
+                        $("#modal-checkout").modal("hide")
+                        $scope.cart.printBill(resp.data.pathFile)
+                        $scope.voucher.voucherPrice=0
+                        $scope.voucher.clearVoucher();
+                        $scope.voucher.voucherCode = "";
+                        $scope.order.money_give = 0
+                        $scope.order.money_send = 0
+                        //document.location.href = document.location.href;
 
-            }).catch(error => {
-                if(error?.data){
-                    if(error.data.status==444)alert(error.data.data);
-                    else {
-                        try {
-                            var alertMessage = "";
-                            const jsonArray = JSON.parse(error.data.message);
-                            jsonArray.forEach(function (item) {
-                                alertMessage += item + "\n";
-                            });
-                            alert(alertMessage)
-                        }catch (e) {
-                            alert(error.data.message)
+                    }).catch(error => {
+                        if(error?.data){
+                            if(error.data.status==444)alert(error.data.data);
+                            else {
+                                try {
+                                    var alertMessage = "";
+                                    const jsonArray = JSON.parse(error.data.message);
+                                    jsonArray.forEach(function (item) {
+                                        alertMessage += item + "\n";
+                                    });
+                                    //alert(alertMessage)
+                                }catch (e) {
+                                    //alert(error.data.message)
+                                }
+
+
+                            }
                         }
-
-
-                    }
+                        console.log(error)
+                    })
+                },
+                error: function(error) {
+                    console.log(error)
                 }
-                else alert("Đặt hàng thất bại");
-                console.log(error)
-            })
+            });
         },
         purchase1() {
             var order = angular.copy(this);
@@ -694,6 +730,7 @@ app.controller("trademark-ctrl", function($scope, $http) {
         }
     }
 });
+// -----------------------------------Category-------------------------------------------------
 app.controller("category-ctrl", function($scope, $http) {
     $scope.items = [];
 
@@ -779,7 +816,268 @@ app.controller("category-ctrl", function($scope, $http) {
         }
     }
 });
+//-----------------------------------------------------------------------------
+app.controller("size-ctrl", function($scope, $http) {
+    $scope.items = [];
 
+    $scope.form = {};
+
+    $scope.initialize = function() {
+        $http.get("/rest/size").then(resp => {
+            $scope.items = resp.data;
+
+        });
+    }
+    $scope.initialize();
+    $scope.reset = function() {
+        $scope.form = {
+
+        }
+    }
+    $scope.edit = function(item) {
+        $scope.form = angular.copy(item);
+
+    }
+    $scope.create = function() {
+        var item = angular.copy($scope.form);
+        $http.post(`/rest/size`, item).then(resp => {
+            resp.data, createDate = new Date(resp.data.createDate);
+            $scope.items.push(resp.data);
+            $scope.reset();
+            alert("Thêm mới thành công");
+        }).catch(error => {
+            alert("Lỗi thêm mới loại sản phẩm");
+            console.log("Error", error);
+        })
+    }
+    $scope.update = function(item) {
+        var item = angular.copy($scope.form);
+        $http.put(`/rest/size/${item.size_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items[index] = item;
+            alert("Cập nhập thành công");
+        }).catch(error => {
+            alert("Cập nhập thất bại");
+            console.log("Error", error);
+        })
+    }
+    $scope.delete = function(item) {
+        $http.delete(`/rest/size/${item.size_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items.splice(index, 1);
+            $scope.reset();
+            alert("Xóa thành công");
+        }).catch(error => {
+            alert("Không thể xóa loại sản phẩm vì vẫn còn hàng trong kho");
+            console.log("Error", error);
+        })
+    }
+    $scope.pager = {
+        page: 0,
+        size: 6,
+        get items() {
+            var start = this.page * this.size;
+            return $scope.items.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1 * $scope.items.length / this.size);
+        },
+        first() {
+            this.page = 0;
+        },
+        prev() {
+            this.page--;
+            if (this.page < 0) {
+                this.last();
+            }
+        },
+        next() {
+            this.page++;
+            if (this.page >= this.count) {
+                this.first();
+            }
+        },
+        last() {
+            this.page = this.count - 1;
+        }
+    }
+});
+
+//-----------------------------COLOR------------------------------------------------
+app.controller("color-ctrl", function($scope, $http) {
+    $scope.items = [];
+
+    $scope.form = {};
+
+    $scope.initialize = function() {
+        $http.get("/rest/color").then(resp => {
+            $scope.items = resp.data;
+
+        });
+    }
+    $scope.initialize();
+    $scope.reset = function() {
+        $scope.form = {
+
+        }
+    }
+    $scope.edit = function(item) {
+        $scope.form = angular.copy(item);
+
+    }
+    $scope.create = function() {
+        var item = angular.copy($scope.form);
+        $http.post(`/rest/color`, item).then(resp => {
+            resp.data, createDate = new Date(resp.data.createDate);
+            $scope.items.push(resp.data);
+            $scope.reset();
+            alert("Thêm mới thành công");
+        }).catch(error => {
+            alert("Lỗi thêm mới loại sản phẩm");
+            console.log("Error", error);
+        })
+    }
+    $scope.update = function(item) {
+        var item = angular.copy($scope.form);
+        $http.put(`/rest/color/${item.color_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items[index] = item;
+            alert("Cập nhập thành công");
+        }).catch(error => {
+            alert("Cập nhập thất bại");
+            console.log("Error", error);
+        })
+    }
+    $scope.delete = function(item) {
+        $http.delete(`/rest/color/${item.color_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items.splice(index, 1);
+            $scope.reset();
+            alert("Xóa thành công");
+        }).catch(error => {
+            alert("Không thể xóa loại sản phẩm vì vẫn còn hàng trong kho");
+            console.log("Error", error);
+        })
+    }
+    $scope.pager = {
+        page: 0,
+        size: 6,
+        get items() {
+            var start = this.page * this.size;
+            return $scope.items.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1 * $scope.items.length / this.size);
+        },
+        first() {
+            this.page = 0;
+        },
+        prev() {
+            this.page--;
+            if (this.page < 0) {
+                this.last();
+            }
+        },
+        next() {
+            this.page++;
+            if (this.page >= this.count) {
+                this.first();
+            }
+        },
+        last() {
+            this.page = this.count - 1;
+        }
+    }
+});
+//-----------------------------Material-------------------------------------------------
+app.controller("material-ctrl", function($scope, $http) {
+    $scope.items = [];
+
+    $scope.form = {};
+
+    $scope.initialize = function() {
+        $http.get("/rest/material").then(resp => {
+            $scope.items = resp.data;
+
+        });
+    }
+    $scope.initialize();
+    $scope.reset = function() {
+        $scope.form = {
+
+        }
+    }
+    $scope.edit = function(item) {
+        $scope.form = angular.copy(item);
+
+    }
+    $scope.create = function() {
+        var item = angular.copy($scope.form);
+        $http.post(`/rest/material`, item).then(resp => {
+            resp.data, createDate = new Date(resp.data.createDate);
+            $scope.items.push(resp.data);
+            $scope.reset();
+            alert("Thêm mới thành công");
+        }).catch(error => {
+            alert("Lỗi thêm mới loại sản phẩm");
+            console.log("Error", error);
+        })
+    }
+    $scope.update = function(item) {
+        var item = angular.copy($scope.form);
+        $http.put(`/rest/material/${item.material_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items[index] = item;
+            alert("Cập nhập thành công");
+        }).catch(error => {
+            alert("Cập nhập thất bại");
+            console.log("Error", error);
+        })
+    }
+    $scope.delete = function(item) {
+        $http.delete(`/rest/material/${item.material_id}`, item).then(resp => {
+            var index = $scope.items.findIndex(p => p.id == item.id);
+            $scope.items.splice(index, 1);
+            $scope.reset();
+            alert("Xóa thành công");
+        }).catch(error => {
+            alert("Không thể xóa loại sản phẩm vì vẫn còn hàng trong kho");
+            console.log("Error", error);
+        })
+    }
+    $scope.pager = {
+        page: 0,
+        size: 6,
+        get items() {
+            var start = this.page * this.size;
+            return $scope.items.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1 * $scope.items.length / this.size);
+        },
+        first() {
+            this.page = 0;
+        },
+        prev() {
+            this.page--;
+            if (this.page < 0) {
+                this.last();
+            }
+        },
+        next() {
+            this.page++;
+            if (this.page >= this.count) {
+                this.first();
+            }
+        },
+        last() {
+            this.page = this.count - 1;
+        }
+    }
+});
+
+
+//-----------------------------------------------------------------------------
 app.controller("orderstatus-ctrl", function($scope, $http) {
     $scope.items = [];
  

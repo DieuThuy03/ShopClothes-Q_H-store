@@ -112,6 +112,8 @@
 													<option value="">Tất cả</option>
 													<option value="2GB">2GB</option>
 													<option value="4GB">4GB</option>
+													<option value="8GB">8GB</option>
+													<option value="12GB">12GB</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
@@ -119,6 +121,10 @@
 												<select class="form-control" name="Rom"
 													data-live-search="true" style="height: 36px;">
 													<option value="">Tất cả</option>
+													<option value="1TB">1TB</option>
+													<option value="512GB">512GB</option>
+													<option value="256GB">256GB</option>
+													<option value="128GB">128GB</option>
 													<option value="64GB">64GB</option>
 													<option value="32GB">32GB</option>
 												</select>
@@ -139,6 +145,8 @@
 													<option value="">Tất cả</option>
 													<option value="2K">2K</option>
 													<option value="4K">4K</option>
+													<option value="6K">6K</option>
+													<option value="8K">8K</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
@@ -165,11 +173,11 @@
 								<th>Ngày nhập kho</th>
 								<th>Hình ảnh</th>
 								<th>Loại sản phẩm</th>
-								<th>Thương hiệu</th>
+<!--								<th>Thương hiệu</th>-->
 								<th>Khuyễn mãi</th>
-								<th>Chip</th>
-								<th>Ram</th>
-								<th>Bộ nhớ</th>
+								<th>Màu sắc</th>
+								<th>Chất Liêu</th>
+								<th>Size</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -189,11 +197,12 @@
 								<td><img th:src="@{|/assets/images/${p.image1}|}"
 									style="max-width: 70px; height: 70px;"></td>
 								<td>[[${p.category.Name}]]</td>
-								<td>[[${p.trademark.Name}]]</td>
+<!--								<td>[[${p.trademark.Name}]]</td>-->
 								<td>[[${p.distcount}]] %</td>
-								<td>[[${p.chip}]]</td>
-								<td>[[${p.ram}]]</td>
-								<td>[[${p.rom}]]</td>
+								<td>[[${p.Color.Name}]]</td>
+								<td>[[${p.material.Name}]]</td>
+								<td>[[${p.Size.name}]]</td>
+
 								<!-- 								<td><a th:if="${p.lastest}==true" -->
 								<!-- 									class="btn btn-round btn-success"><i class="fa fa-check"></i></a> -->
 								<!-- 									<a th:if="${p.lastest}==false" class="btn btn-round btn-danger"><i -->
@@ -205,10 +214,11 @@
 								<td><a 
 									th:href="@{|/admin/product/edit?product_id=${p.product_id}|}"
 									class="btn btn-round btn-primary"> <i class="fa fa-pencil"></i>
-								</a> <a  th:href="@{|/admin/product/delete/${p.product_id}|}"
-									class="btn btn-round btn-danger"> <i class="fa fa-trash-o "></i>
-										
 								</a>
+<!--									<a  th:href="@{|/admin/product/delete/${p.product_id}|}"-->
+<!--									class="btn btn-round btn-danger"> <i class="fa fa-trash-o "></i>-->
+<!--										-->
+<!--								</a>-->
 								</td>
 							</tr>
 

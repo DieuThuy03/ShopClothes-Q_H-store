@@ -95,8 +95,16 @@
 								<span class="rating1" title="RAM "> [[${p.ram}]] </span> 
 								<span class="rating2" title="Bộ nhớ trong ">  [[${p.rom}]] </span> 
 							</div>
-							<span class="price"><span class="amount">
-								[[${#numbers.formatDecimal(p.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ
+							<span class="price">
+								<span class="amount">
+									<span th:if="${p.distcount} > 0">
+										<span class="amount" style="margin-left: 5px; text-decoration: line-through;">[[${#numbers.formatDecimal(p.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+										<span class="amount text-danger">[[${#numbers.formatDecimal(p.unit_price * (100 - p.distcount) / 100, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+									</span>
+									<span th:unless="${p.distcount} > 0">
+										<span class="amount">[[${#numbers.formatDecimal(p.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
+									</span>
+								</span>
 							</span>
 						</div>
 					</div>

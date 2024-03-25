@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    @Value("${external.directory}")
+    @Value("H:\\Do an tot nghiep\\ban hang jsp\\New folder\\New folder\\fot\\fot\\testcuoi\\bills")
     private String externalDirectoryPath;
 
     @Override

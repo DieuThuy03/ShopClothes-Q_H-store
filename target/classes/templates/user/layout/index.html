@@ -48,9 +48,9 @@
 
 		</div>
 		<div id="fb-root"></div>
-		<script async defer crossorigin="anonymous"
-			src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1759690680890768&autoLogAppEvents=1"
-			nonce="xfm4qFPd"></script>
+<!--		<script async defer crossorigin="anonymous"-->
+<!--			src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1759690680890768&autoLogAppEvents=1"-->
+<!--			nonce="xfm4qFPd"></script>-->
    
 		<div class="footer pt_60">
 		
@@ -105,6 +105,47 @@
 	<!-- Shopping Cart JS -->
 	<script src="/assets/js/shopping-cart-app.js"></script>
 	<script src="/assets/js/price.js"></script>
+<script>
+	const validatePhone = (text) => {
+		if (text == null || text == undefined || text.length == 0) {
+			return "Vui lòng nhập số điện thoại";
+		}
+		var regex = /^(0[3|5|7|8|9])+([0-9]{8})\b$/i;
+		if (text.match(regex))
+			return "";
+		return "SĐT không hợp lệ, phải gồm 10 chữ số và bắt đầu bằng 03, 05, 07, 08 hoặc 09";
+	}
+	const validateCardId = (text) => {
+		if (text == null || text == undefined || text.length == 0) {
+			return "Vui lòng nhập căn cước công dân";
+		}
+		var regex = /^[0-9]{12}$/i;
+		if (text.match(regex))
+			return "";
+		return "Căn cước công dân không hợp lệ, phải gồm 12 chữ số";
+	}
+	const validateAddress = (text) => {
+		if (text == null || text == undefined || text.length == 0) {
+			return "Vui lòng nhập địa chỉ giao hàng";
+		}
+		return "";
+	}
+	$('#payment').click(function (){
+		if(validatePhone($('#phone').val()) != ""){
+			alert(validatePhone($('#phone').val()));
+			return;
+		}
+		if(validateAddress($('#address').val()) != ""){
+			alert(validateAddress($('#address').val()));
+			return;
+		}
+		if(validateCardId($('#cardId').val()) != ""){
+			alert(validateCardId($('#cardId').val()));
+			return;
+		}
+		$('#myModal').modal('show');
+	});
+</script>
 </body>
 
 </html>

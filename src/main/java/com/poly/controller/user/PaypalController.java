@@ -2,8 +2,10 @@ package com.poly.controller.user;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.poly.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +32,12 @@ public class PaypalController {
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
 
+	@Autowired
+	VoucherService voucherService;
+
 	@GetMapping("/thanhtoanonline")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("vouchers", voucherService.findAll());
 		return "user/home";
 	}
 
@@ -43,12 +49,11 @@ public class PaypalController {
 					"http://localhost:8080/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
-					return "redirect:"+link.getHref();
+					return "redirect:" + link.getHref();
 				}
 			}
 			
 		} catch (PayPalRESTException e) {
-		
 			e.printStackTrace();
 		}
 		return "redirect:/";

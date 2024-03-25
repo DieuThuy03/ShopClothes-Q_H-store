@@ -112,17 +112,8 @@ public class OrderServiceImlq implements OrderService {
 	@Override
 	@Transactional
 	public Order createBillSell(BillDTO billDTO,String code) throws Throwable {
-		Account account = new Account();
 		VoucherDetail voucherDetail = new VoucherDetail();
 		var order = billDTO.getOrder();
-		UUID randomUUID = UUID.randomUUID();
-		var fullname = order.getAccount().getUsername()!=null
-				?order.getAccount().getUsername()+"_"+randomUUID:"Anonymous"+"_"+randomUUID;
-		account.setUsername("Anonymous");
-		account.setFullname(fullname);
-		account.setActive(false);
-		Account newAccount = accountDao.save(account);
-		order.setAccount(newAccount);
 		order.setStatus(3);
 		Voucher voucher = null;
 		if(!code.equals("")){
@@ -149,7 +140,7 @@ public class OrderServiceImlq implements OrderService {
 
 	@Override
 	public Order findById(Integer id) {
-	
+
 		return dao.findById(id).get();
 	}
 	
@@ -165,8 +156,8 @@ public class OrderServiceImlq implements OrderService {
 	}
 	@Override
 	public void deleteById(Integer id) {
+		ddao.deleteOrderId(id);
 		dao.deleteById(id);
-		
 	}
 	@Override
 	public Order update(Order order) {

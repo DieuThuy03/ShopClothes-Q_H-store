@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.poly.dao.ImageProductDao;
 import com.poly.dao.ProductDetailDao;
 import com.poly.entity.*;
+import com.poly.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -44,6 +45,9 @@ public class OrderController {
 	@Autowired
 	private ProductDetailDao productDetailDao;
 
+	@Autowired
+	VoucherService voucherService;
+
 	public void updateInformationProduct(Product product, ProductDetail detail , List<ImageProduct> images){
 		if(detail!=null){
 			product.setDetail(detail.getDetail());
@@ -74,7 +78,8 @@ public class OrderController {
 	}
 
 	@RequestMapping("/order/checkout")
-	public String checkout() {
+	public String checkout(Model model) {
+		model.addAttribute("vouchers", voucherService.findAll());
 		return "user/order/checkout";
 	}
 	@RequestMapping("/order/list")
