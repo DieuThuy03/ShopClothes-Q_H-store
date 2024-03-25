@@ -90,10 +90,10 @@
 								<input type="date" name="Product_date" th:value="${pro.Product_date}"
 									class="form-control" required>
 							</div>
+							<!--	--------------------Category------------------------------------------->
 							<div class="form-group col-sm-6">
 								<div>Loại sản phẩm</div>
-<!-- 								<input type="text" name="category.Name" th:value="${pro.category.Name}" -->
-<!-- 									class="form-control"> -->
+
 							<select name="category.Category_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
 
 								<div class="form-group selectpicker show-tick" th:each="c,state:${cates}">

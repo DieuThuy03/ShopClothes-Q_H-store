@@ -90,6 +90,7 @@
 											<input type="date" name="Product_date"
 												th:value="${pro.Product_date}" class="form-control">
 										</div>
+										<!--	--------------------Category------------------------------------------->
 										<div class="form-group col-sm-6">
 											<div>Loại sản phẩm</div>
 											<!-- 								<input type="text" name="category.Name" th:value="${pro.category.Name}" -->
@@ -106,28 +107,49 @@
 										</div>
 
 										<!--	--------------------Size------------------------------------------->
+
 										<div class="form-group col-sm-6">
 											<div>Size</div>
-											<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
-
-												<div class="form-group selectpicker show-tick" th:each="s,state:${size}">
-													<option th:value="${s.Size_id}" >[[${s.name}]]</option>
+											<select name="size.Size_id" data-live-search="true"
+													class="form-group col-sm-12 selectpicker show-tick"
+													style="height: 36px;">
+												<option hidden="true" th:value="${pro.size.Size_id}">[[${pro.size.Name}]]</option>
+												<div class="form-group selectpicker show-tick"
+													 th:each="s,state:${size}">
+													<option th:value="${s.Size_id}">[[${s.name}]]</option>
 												</div>
 											</select>
 										</div>
 
 										<!--	--------------------Material------------------------------------------->
+
 										<div class="form-group col-sm-6">
 											<div>Chất Liêu</div>
-											<select name="material.Material_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
-
-												<div class="form-group selectpicker show-tick" th:each="m,state:${materials}">
-													<option th:value="${m.Material_id}" >[[${m.name}]]</option>
+											<select name="material.Material_id" data-live-search="true"
+													class="form-group col-sm-12 selectpicker show-tick"
+													style="height: 36px;">
+												<option hidden="true" th:value="${pro.material.Material_id}">[[${pro.material.Name}]]</option>
+												<div class="form-group selectpicker show-tick"
+													 th:each="m,state:${materials}">
+													<option th:value="${m.Material_id}">[[${m.name}]]</option>
 												</div>
 											</select>
 										</div>
+										<!--	-----------------------Color---------------------------------------->
 
 
+										<div class="form-group col-sm-6">
+											<div>Màu sắc</div>
+											<select name="color.Color_id" data-live-search="true"
+													class="form-group col-sm-12 selectpicker show-tick"
+													style="height: 36px;">
+												<option hidden="true" th:value="${pro.color.Color_id}">[[${pro.color.Name}]]</option>
+												<div class="form-group selectpicker show-tick"
+													 th:each="c,state:${colors}">
+													<option th:value="${c.Color_id}">[[${c.name}]]</option>
+												</div>
+											</select>
+										</div>
 
 										<div class="form-group col-sm-6">
 											<div>Thương hiệu</div>
