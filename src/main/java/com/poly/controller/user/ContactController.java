@@ -24,7 +24,7 @@ public class ContactController {
 		
 			) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo("goalshopfpt@gmail.com");
+		msg.setTo("qhshopsd51@gmail.com");
 		msg.setText(
 		"Tên khách hàng	 : " 
 		+ content 

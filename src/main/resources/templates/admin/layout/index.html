@@ -232,6 +232,19 @@
         })
     </script>
 
+    <script>
+        function validateForm() {
+            var voucherPrice = document.getElementById("voucherPrice").value;
+            var estimate = document.getElementById("estimate").value;
+            if (parseFloat(voucherPrice) < parseFloat(estimate)) {
+                alert("Giá voucher phải lớn hơn hoặc bằng mức áp dụng.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+
 </body>
 
 </html>

@@ -8,14 +8,14 @@
 		<div class="wrapper-cart tin__tuc" style="padding-bottom: 20px">
 				<div>
 					<div class="col-md-6 mb_30" th:each="post:${items.pageList}">
-						
+
 						<div class="mtb_10 ">
 							<a class="post_tieude" th:href="@{|/post/detail/${post.post_id}|}">[[${post.Post_Name}]] </a>
 						</div>
 							<div class=" col-md-6">
-								<a th:href="@{|/post/detail/${post.post_id}|}"> <img 
+								<a th:href="@{|/post/detail/${post.post_id}|}"> <img
 									th:src="@{|/assets/images/${post.image}|}"  alt="OYEENok"></a>
-									
+
 							</div>
 							<div class="col-md-6"><p>[[${post.post_conten}]]</p></div>
 							<div class=" col-md-12 details mtb_20">
@@ -27,11 +27,11 @@
 										class="fa fa-arrow-circle-right"aria-hidden="true"></i></a>
 								</div>
 							</div>
-						
+
 					</div>
 				</div>
 				</div>
-			
+
 <!--					  <div class="row">-->
 <!--                            <div class="col-xs-12">-->
 <!--                                <ul class="htc__pagenation">-->
@@ -90,7 +90,7 @@
 <!--					  </div>-->
 
 
-		
+
 
 	</main>
 </body>

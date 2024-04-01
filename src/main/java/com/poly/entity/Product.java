@@ -66,7 +66,6 @@ public class Product implements Serializable {
 	@JoinColumn(name = "Category_id")
 	Category category;
 
-
 	@ManyToOne
 	@JoinColumn(name = "Trademark_id")
 	Trademark trademark;

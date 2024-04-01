@@ -357,11 +357,11 @@ public class ProductController {
 
 	@RequestMapping("/product/list/find/{pageNumber}")
 	public String find(Model model, @RequestParam("Category_id") String Category_id, @RequestParam("Trademark_id") String Trademark_id,
-			@RequestParam("Ram") String Ram, @RequestParam("Rom") String Rom, @RequestParam("Resolution") String Resolution,
+			@RequestParam("Size_id") String Size_id, @RequestParam("Color_id") String Color_id, @RequestParam("Material_id") String Material_id,
 			@RequestParam("MinPrice") Integer unit_price, @RequestParam("MaxPrice") Integer unit_price1, HttpServletRequest request,
 			@PathVariable int pageNumber) {
 		List<Product> list = pdao.findByAllKeyWord(unit_price, unit_price1, Category_id, Trademark_id,
-				Ram, Rom, Resolution).stream()
+				Size_id, Color_id, Material_id).stream()
 				.map(product -> {
 					ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
 					List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
@@ -372,7 +372,7 @@ public class ProductController {
 		model.addAttribute("items.pageList", list);
 		
 		model.addAttribute("sizepro", pdao.findByAllKeyWord(unit_price, unit_price1, Category_id, Trademark_id,
-				Ram, Rom, Resolution).size());
+				Size_id, Color_id, Material_id).size());
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
 		int pagesize = 9;
 		pages = new PagedListHolder<>(list);

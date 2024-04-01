@@ -53,7 +53,7 @@ public class SignupController {
 			SimpleMailMessage message = new SimpleMailMessage();
 			String activeurl = "Nhấn vào link:  "+urlActive+" để kích hoạt tài khoản ";
 			message.setTo(acc.getEmail());
-			message.setSubject("Kích hoạt tài khoản GoalShop");
+			message.setSubject("Kích hoạt tài khoản QhStore");
 			message.setText(activeurl);
 			// Send Message!
 			this.emailSender.send(message);

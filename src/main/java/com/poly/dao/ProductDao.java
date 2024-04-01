@@ -74,14 +74,11 @@ public interface ProductDao extends JpaRepository<Product, Integer>, JpaSpecific
 //		@Query(value="select * from Products where Unit_price between ?1 and ?2 and Category_id like %?3% and Trademark_id like %?4% "
 //				+ "and Ram like %?5% and Rom like %?6% and Resolution like  %?7% ", nativeQuery = true)
 
-		@Query(value="select * from Products INNER JOIN product_detail on Products.Product_id = product_detail.ProductID " +
-				" where Products.Unit_price between ?1 and ?2 and Products.Category_id  like %?3% and Products.Trademark_id like %?4% " +
-				" and  product_detail.Ram like %?5% " +
-				"   and product_detail.Rom like %?6% and product_detail.Resolution like  %?7% ", nativeQuery = true)
+		@Query(value="select * from Products ", nativeQuery = true)
 		List<Product> findByAllKeyWord(
-				@Param("MinPrice") Integer unit_price, @Param("MaxPrice") Integer unit_price1   ,
-					@Param("Category_id") String Category_id , @Param("Trademark_id") String Trademark_id , @Param("Ram") String Ram , 
-					@Param("Rom") String Rom , @Param("Resolution") String Resolution);
+				@Param("MinPrice") Integer unit_price, @Param("MaxPrice") Integer unit_price1  ,
+					@Param("Category_id") String Category_id , @Param("Trademark_id") String Trademark_id , @Param("Size_id") String Size_id ,
+				@Param("Color_id") String Color_id , @Param("Material_id") String Material_id);
 		
 		@Query(value="select * from Products where Category_id like '1'", nativeQuery = true)
 		List<Product> findByLaptop();

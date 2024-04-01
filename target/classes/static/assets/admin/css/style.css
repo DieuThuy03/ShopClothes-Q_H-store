@@ -386,7 +386,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: firebrick;
+    background: #ADD8E6;
 }
 
 #sidebar h5 {
@@ -567,7 +567,7 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: firebrick;
+    background: #ADD8E6;
     border-bottom: 1px solid #393d46;
 }
 
