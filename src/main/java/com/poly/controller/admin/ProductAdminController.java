@@ -12,15 +12,18 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import com.poly.dao.*;
 import com.poly.entity.*;
 import com.poly.service.ImageProductService;
 import com.poly.service.ProductDetailService;
+import com.poly.service.impl.ProductServiceImlq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.poly.dao.AccountDao;
-import com.poly.dao.CategoryDao;
-import com.poly.dao.ProductDao;
-import com.poly.dao.TrademarkDao;
 import com.poly.service.AccountService;
 import com.poly.service.ProductService;
 
@@ -57,11 +56,11 @@ public class ProductAdminController {
 	@Autowired
 	ImageProductService imageProductService;
 
-//	@RequestMapping({"/"})
-//	public String home() { 
-//		return "redirect:/product/list";
-//	}
+	@Autowired
+	ProductDao productDao;
 
+	@Autowired
+	OrderDao odao;
 	@GetMapping("/admin/product/list")
 	public String index(Model model, HttpServletRequest request, RedirectAttributes redirect) {
 		request.getSession().setAttribute("productlist", null);
@@ -353,28 +352,7 @@ public class ProductAdminController {
 		}
 	}
 
-//	@RequestMapping("product/update")
-//	public String update(Product pro, Model model, @RequestParam("photo_img1") MultipartFile file1) throws IOException {
-//		model.addAttribute("pro", pro);
-//		if (dao.existsById(pro.getProduct_id())) {
-//			File saveFile1 = proservice.save(file1 , "/assets/images");
-//			String filename1 = file1.getOriginalFilename();
-//			pro.setProduct_date(new Date());
-//			if (filename1 == "") {
-//				dao.save(pro);
-//				model.addAttribute("message", "Cập nhập thành công");
-//				return "redirect:/product/edit?product_id=" + pro.getProduct_id();
-//			} else {
-//				pro.setImage1(filename1);
-//				dao.save(pro);
-//				model.addAttribute("message", "Cập nhập thành công");
-//				return "redirect:/product/edit?product_id=" + pro.getProduct_id();
-//			}
-//		} else {
-//			model.addAttribute("message", "Cập nhập thất bại");
-//			return "redirect:/product/edit?product_id=" + pro.getProduct_id();
-//		}
-//	}
+
 
 	@RequestMapping("/admin/product/update")
 	public String update(Product pro, Model model, @RequestParam("photo_img") MultipartFile[] file) throws IOException {
@@ -498,5 +476,160 @@ public class ProductAdminController {
 		}
 
 	}
+
+//	@GetMapping("/admin/order/addProductDetail")
+//	public String add(Model model, HttpServletRequest request, RedirectAttributes redirect) {
+//		request.getSession().setAttribute("productlist", null);
+//		if (model.asMap().get("success") != null)
+//			redirect.addFlashAttribute("success", model.asMap().get("success").toString());
+//		return "/admin/order/addProductDetail.html";
+//	}
+
+
+//	@GetMapping("/admin/product/list/page/{pageNumber}")
+//	public String add(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+//		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
+//		int pagesize = 10;
+//		List<Product> list = (List<Product>) proservice.findAll();
+//
+//		model.addAttribute("sizepro", list.size());
+//
+//		if (pages == null) {
+//			pages = new PagedListHolder<>(list);
+//			pages.setPageSize(pagesize);
+//		} else {
+//			final int goToPage = pageNumber - 1;
+//			if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+//				pages.setPage(goToPage);
+//			}
+//		}
+//		request.getSession().setAttribute("productlist", pages);
+//		int current = pages.getPage() + 1;
+//		int begin = Math.max(1, current - list.size());
+//		int end = Math.min(begin + 5, pages.getPageCount());
+//		int totalPageCount = pages.getPageCount();
+//		String baseUrl = "/admin/product/list/page/";
+//		model.addAttribute("beginIndex", begin);
+//		model.addAttribute("endIndex", end);
+//		model.addAttribute("currentIndex", current);
+//		model.addAttribute("totalPageCount", totalPageCount);
+//		model.addAttribute("baseUrl", baseUrl);
+//		model.addAttribute("items", pages);
+//		return "/admin/order/addProductDetail.html";
+//	}
+
+//	@GetMapping("/admin/order/addProductDetail/page/{pageNumber}")
+//	public String addProductDetail(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+//		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
+//		int pagesize = 10;
+//		List<Product> list = (List<Product>) proservice.findAll();
+//		model.addAttribute("sizepro", list.size());
+//
+//		if (pages == null) {
+//			pages = new PagedListHolder<>(list);
+//			pages.setPageSize(pagesize);
+//		} else {
+//			final int goToPage = pageNumber - 1;
+//			if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+//				pages.setPage(goToPage);
+//			}
+//		}
+//		request.getSession().setAttribute("productlist", pages);
+//		int current = pages.getPage() + 1;
+//		int begin = Math.max(1, current - list.size());
+//		int end = Math.min(begin + 5, pages.getPageCount());
+//		int totalPageCount = pages.getPageCount();
+//		String baseUrl = "/admin/product/list/page/";
+//		model.addAttribute("items.pageList", list);
+//		model.addAttribute("beginIndex", begin);
+//		model.addAttribute("endIndex", end);
+//		model.addAttribute("currentIndex", current);
+//		model.addAttribute("totalPageCount", totalPageCount);
+//		model.addAttribute("baseUrl", baseUrl);
+//		model.addAttribute("items", pages);
+//		return "/admin/order/addProductDetail.html";
+//	}
+
+	@GetMapping("/admin/order/addProductDetail/page/{pageNumber}")
+	public String addProductDetail(HttpServletRequest request, @PathVariable int pageNumber, @RequestParam(required = false) Integer orderId, Model model) {
+		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
+		int pagesize = 10;
+		List<Product> list = (List<Product>) proservice.findAll();
+		model.addAttribute("sizepro", list.size());
+
+		if (pages == null) {
+			pages = new PagedListHolder<>(list);
+			pages.setPageSize(pagesize);
+		} else {
+			final int goToPage = pageNumber - 1;
+			if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+				pages.setPage(goToPage);
+			}
+		}
+		request.getSession().setAttribute("productlist", pages);
+		int current = pages.getPage() + 1;
+		int begin = Math.max(1, current - list.size());
+		int end = Math.min(begin + 5, pages.getPageCount());
+		int totalPageCount = pages.getPageCount();
+		String baseUrl = "/admin/product/list/page/";
+		model.addAttribute("items.pageList", list);
+		model.addAttribute("beginIndex", begin);
+		model.addAttribute("endIndex", end);
+		model.addAttribute("currentIndex", current);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("baseUrl", baseUrl);
+		model.addAttribute("items", pages);
+
+		// Thêm orderId vào model nếu nó tồn tại
+		if (orderId != null) {
+			model.addAttribute("order_id", orderId);
+		}
+
+		return "/admin/order/addProductDetail.html";
+	}
+
+
+	//	@GetMapping("/api/getProductDetail/{id}")
+//	public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
+//		// Lấy sản phẩm từ cơ sở dữ liệu dựa trên ID
+//		Product product = proservice.findById(id);
+//		if (product != null) {
+//			return ResponseEntity.ok().body(product);
+//		} else {
+//			return ResponseEntity.notFound().build();
+//		}
+//	}
+@GetMapping("/api/getProductDetail/{id}")
+public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
+	// Lấy sản phẩm từ cơ sở dữ liệu dựa trên ID
+	Product product = proservice.findById(id);
+	if (product != null) {
+		// Lấy thông tin chi tiết của sản phẩm từ bảng ProductDetail
+		ProductDetail productDetail = productDetailService.findByProductId(id);
+
+		// Lấy thông tin của loại sản phẩm từ bảng Category
+		Category category = product.getCategory();
+		if (category != null) {
+			product.setCategory(category);
+		}
+		// Lấy thông tin của màu sắc từ bảng Color
+		Color color = product.getColor();
+		if (color != null) {
+			product.setColor(color);
+		}
+
+		// Lấy thông tin của kích thước từ bảng Size
+		Size size = product.getSize();
+		if (size != null) {
+			product.setSize(size);
+		}
+
+		return ResponseEntity.ok().body(product);
+	} else {
+		return ResponseEntity.notFound().build();
+	}
+}
+
+
 
 }

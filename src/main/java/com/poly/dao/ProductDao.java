@@ -17,7 +17,9 @@ import com.poly.entity.Product;
 
 import com.poly.entity.ReportCategory;
 import com.poly.entity.ReportTrademark;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductDao extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 //	Page<Product> findByQuantityGreaterThan(Integer quantity,Pageable pageable);
 	@Query("SELECT p FROM Product p WHERE p.category.id=?1")

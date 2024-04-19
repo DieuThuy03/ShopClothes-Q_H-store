@@ -1,36 +1,130 @@
-	<div class="row mt">
-			<div class="col-md-12">
-				<div class="content-panel">
-					
-<table  class="table   ">
-	<h3>
-		&emsp;<i class="fa fa-angle-right"></i> Danh sách sản phẩm đơn hàng
-	</h3>
-	<hr>
-	<thead>
-		<tr>
-			<th><h4>&ensp;Số thứ tự</h4></th>
+<div class="row mt">
+	<div class="col-md-12">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Your Title</title>
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+			<style>
+				/* Đặt kích thước và vị trí cho modal */
+				.modal-lg {
+					max-width: 90% !important; /* Thiết lập chiều rộng modal */
+				}
 
-			<th><h4>Tên sản phẩm</h4></th>
-			<th><h4>Hình ảnh</h4></th>
-			<th><h4>Số lượng</h4></th>
-			<th><h4>Tổng giá</h4></th>
-		</tr>
-	</thead>
-	
-	<tbody>
-		<tr class="box pull-up-1" th:each="odt,state:${odetail}">
-			<td>&ensp;&ensp;[[${state.index} +1]]</td>
+				body {
+					font-size: 18px; /* Kích thước chữ cơ bản */
+				}
 
-			<td>[[${odt.product.Name}]]</td>
-			<td><img th:src="@{|/assets/images/${odt.product.Image1}|}"
-				style="width: 100px; height: 100px;"></td>
-			<td>[[${odt.Quantity}]] Chiếc</td>
-			<td>[[${#numbers.formatDecimal(odt.Price , 0 ,
-				'COMMA',2,'POINT')}]] Đ</td>
-		</tr>
-	</tbody>
-</table>
+				/* Điều chỉnh kích thước chữ cho các tiêu đề */
+				h1, h2, h3, h4, h5, h6 {
+					font-size: 1.25em; /* Kích thước chữ cho các tiêu đề */
+				}
+
+				/* Điều chỉnh kích thước chữ cho các thành phần khác */
+				p, a, button, input, select, textarea {
+					font-size: 1em; /* Kích thước chữ cho các thành phần khác */
+				}
+			</style>
+		</head>
+		<div class="content-panel">
+			<!-- Biểu mẫu cập nhật -->
+			<form th:action="@{/admin/order/updateAll}" method="post">
+				<table class="table">
+					<h3>&emsp;<i class="fa fa-angle-right"></i> Danh sách sản phẩm đơn hàng</h3>
+					<hr>
+					<thead>
+					<tr>
+						<th><h4>&ensp;Số thứ tự</h4></th>
+						<th><h4>Tên sản phẩm</h4></th>
+						<th><h4>Hình ảnh</h4></th>
+						<th><h4>Số lượng</h4></th>
+						<th><h4>Giá</h4></th>
+						<th><h4>Xóa</h4></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="box pull-up-1" th:each="odt,state:${odetail}">
+						<td>&ensp;&ensp;[[${state.index} +1]]</td>
+						<td>[[${odt.product.Name}]]</td>
+						<td><img th:src="@{|/assets/images/${odt.product.Image1}|}" style="width: 100px; height: 100px;"></td>
+						<td class="text-center">
+							<input name="quantities" type="number" style="width: 80px" th:value="${odt.Quantity}" min="0">
+							<input type="hidden" name="orderDetailIds" th:value="${odt.Orderdetail_id}">
+						</td>
+						<td>[[${#numbers.formatDecimal(odt.Price , 0 ,'COMMA',0,'POINT')}]] Đ</td>
+						<td class="text-center">
+							<button type="button" class="btn btn-default delete-button"
+									th:attr="data-confirm='Bạn có chắc muốn xóa sản phẩm?'"
+									th:data-url="@{'/admin/order/deleteDetail/' + ${odt.Orderdetail_id}}">
+								<b class="fa fa-trash"></b>
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="text-right" style="margin-right: 10px">
+					<button type="submit" class="btn btn-primary">Cập nhật</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
+
+<!-- Nút "Thêm mới" để mở modal -->
+<button type="button" class="btn btn-info btn-xs" id="addNewProductBtn" data-toggle="modal" data-target="#addProductModal">
+	<span class="glyphicon glyphicon-plus"></span> Thêm mới
+</button>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Thêm mới sản phẩm</h5>
+				<!-- Nút "Đóng" modal -->
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="addProductModalBody">
+				<!-- Nội dung trang HTML sẽ được tải vào đây -->
+			</div>
+		</div>
+	</div>
 </div>
-</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		// Khi nút "Thêm mới" được nhấp
+		$("#addProductModal").on('show.bs.modal', function () {
+			// Sử dụng AJAX để tải trang HTML vào modal body
+			$("#addProductModalBody").load("/admin/order/addProductDetail/page/1");
+		});
+	});
+</script>
+<script th:inline="javascript">
+	$('.delete-button').on('click', function() {
+		var url = $(this).data('url');
+		var confirmation = confirm($(this).data('confirm'));
+
+		if (confirmation) {
+			$.ajax({
+				type: 'POST',
+				url: url,
+				success: function(response) {
+					// Xử lý kết quả nếu cần
+					location.reload(); // Refresh trang sau khi xóa
+				},
+				error: function(xhr, status, error) {
+					// Xử lý lỗi nếu có
+					console.error(xhr.responseText);
+				}
+			});
+		}
+	});
+</script>
+
+</body>
+</html>

@@ -11,12 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-
-import lombok.Data;
+import lombok.*;
 
 @SuppressWarnings("serial")
 @Data
-@Entity 
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "Orderdetails")
 public class OrderDetail implements Serializable {
 	@Id

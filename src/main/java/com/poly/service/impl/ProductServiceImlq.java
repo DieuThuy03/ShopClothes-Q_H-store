@@ -132,17 +132,31 @@ public class ProductServiceImlq implements ProductService {
 		return updatedProducts;
 	}
 
-	@Override
-	public Product findById(Integer id) {
-		
-		Product product =  pdao.findById(id).get();
-		if(product!=null){
-			ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
-			List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
-			this.updateInformationProduct(product, detail, images);
-		}
+//	@Override
+//	public Product findById(Integer id) {
+//
+//		Product product =  pdao.findById(id).get();
+//		if(product!=null){
+//			ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
+//			List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
+//			this.updateInformationProduct(product, detail, images);
+//		}
+//		return product;
+//	}
+@Override
+public Product findById(Integer id) {
+	Optional<Product> optionalProduct = pdao.findById(id);
+	if (optionalProduct.isPresent()) {
+		Product product = optionalProduct.get();
+		ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
+		List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
+		this.updateInformationProduct(product, detail, images);
 		return product;
+	} else {
+		return null; // hoặc throw exception tùy theo yêu cầu của bạn
 	}
+}
+
 
 	@Override
 	public void saveAll(List<Product> products) {
@@ -316,6 +330,15 @@ public class ProductServiceImlq implements ProductService {
 		}
 		ProductEnoughQuantityDTO dto = ProductEnoughQuantityDTO.builder().products(products).errors(errors).build();
 		return dto;
+	}
+
+
+	public Product findProductById(Integer productId) {
+		return pdao.findById(productId).orElse(null);
+	}
+
+	public void updateProduct(Product product) {
+		pdao.save(product);
 	}
 
 }

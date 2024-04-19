@@ -2,7 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{admin/layout/index :: dynamic(~{::main})}">
 
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			font-size: 18px; /* Kích thước chữ cơ bản */
+		}
 
+		/* Điều chỉnh kích thước chữ cho các tiêu đề */
+		h1, h2, h3, h4, h5, h6 {
+			font-size: 1.25em; /* Kích thước chữ cho các tiêu đề */
+		}
+
+		/* Điều chỉnh kích thước chữ cho các thành phần khác */
+		p, a, button, input, select, textarea {
+			font-size: 1em; /* Kích thước chữ cho các thành phần khác */
+		}
+	</style>
+</head>
 <body>
 <main>
 	<div class="row mt">
