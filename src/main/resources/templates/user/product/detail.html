@@ -288,13 +288,15 @@
                                     </a>
                                 </div>
                             </div>
-                            </br>
-                            </br>
                             <div class="caption product-detail text-center">
                                 <h6 data-name="product_name" class="product-name mt_20">
                                     <a href="#" title="Casual Shirt With Ruffle Hem"
                                        th:text="${p.name}" class="cdt-product__name"></a>
                                 </h6>
+                                <div class="rating">
+                                    <span class="rating1" title="RAM "> [[${p.ram}]] </span>
+                                    <span class="rating2" title="Bộ nhớ trong ">  [[${p.rom}]] </span>
+                                </div>
                                 <span class="price">
 											<span class="amount">
 												<span th:if="${p.distcount} > 0">

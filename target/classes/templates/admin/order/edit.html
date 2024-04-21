@@ -2,7 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{admin/layout/index :: dynamic(~{::main})}">
 
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			font-size: 18px; /* Kích thước chữ cơ bản */
+		}
 
+		/* Điều chỉnh kích thước chữ cho các tiêu đề */
+		h1, h2, h3, h4, h5, h6 {
+			font-size: 1.25em; /* Kích thước chữ cho các tiêu đề */
+		}
+
+		/* Điều chỉnh kích thước chữ cho các thành phần khác */
+		p, a, button, input, select, textarea {
+			font-size: 1em; /* Kích thước chữ cho các thành phần khác */
+		}
+	</style>
+</head>
 <body>
 <main>
 	<div class="row mt">
@@ -12,12 +29,12 @@
 						&emsp;<i class="fa fa-angle-right"></i> Thông tin chi tiết
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<a style="float: right; padding: 0 30px;" tH:href=@{/admin/order/list}>
-							<i class="fa fa-mail-reply" style="font-size:18px"></i> Quay lại danh sách
+							<i class="fa fa-mail-reply" style="font-size:18px"></i> Quay lại danh sách 
 						</a>
 					</h3>
 		<div class="panel-body">
 			<form th:action="@{/admin/order/update}" method="post" modelAttribute="ord">
-
+			
 				<div class="panel-heading text-center" style="color: #54aee2;font-style:oblique;font-variant: inherit;font-weight: bolder; "></div>
 					<div class="col-sm-12">
 						<div class="row">
@@ -69,18 +86,18 @@
 							<div class="form-group col-sm-6">
 								<div>Tổng tiền</div>
 								<input type="number" name="price" th:value="${ord.price} *1"
-									class="form-control" readonly>
+									class="form-control" readonly> 
 							</div>
 							<div class="form-group col-sm-6">
 								<div>Trạng thái</div>
 								<select name="Status" class="form-control">
-									<option hidden="true" th:value="${ord.Status}">
+									<option hidden="true" th:value="${ord.Status}"> 
 									<b style="color: #00008B;">[[${ord.status==0?'Đang xử lý' :''}]]</b>
 									<b style="color: #FFD700;">[[${ord.status==1?'Đang giao hàng' :''}]]</b>
 									<b style="color: #2E8B57;">[[${ord.status==3?'Hoàn thành đơn hàng' :''}]]</b>
 									<b style="color: #DC143C;">[[${ord.status==2?'Hủy giao hàng·' :''}]]</b>
 									<b style="color: #DC143C;">[[${ord.status==4?'Đã hủy·' :''}]]</b>
-
+						
 									</option>
 									<option  value="0">Đang xử lý </option>
 									<option  value="1">Đang giao hàng</option>
@@ -111,11 +128,11 @@
 							</div>
 						</div>
 						<div class="text-center">
-
+						
 						<button th:if="${ord.Status}>2" type="submit" class="btn btn-round btn-info" disabled="disabled"><span class="glyphicon glyphicon-check"></span> Cập nhập</button>
-
+				
 						<button th:if="${ord.Status}<3" type="submit" class="btn btn-round btn-info" ><span class="glyphicon glyphicon-check"></span> Cập nhập</button>
-
+						
 						<a th:href="@{|/admin/order/sent/${ord.Order_id}|}"
 										class='btn btn-round btn-info'><span
 										class="fa fa-envelope-o"></span> Gửi Hóa Đơn</a>

@@ -23,7 +23,7 @@ public class SecurityController {
 	
 	@RequestMapping("/security/login/form")
 	public String loginForm( Model model) {
-		model.addAttribute("message","Để tiếp tục, hãy đăng nhập vào QhShop.");
+		model.addAttribute("message","Để tiếp tục, hãy đăng nhập vào GoalShop.");
 		return "user/security/login";
 	}
 

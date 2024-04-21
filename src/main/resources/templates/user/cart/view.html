@@ -30,7 +30,7 @@
 											<td  class="text-center" style="width: 120px"><input
 												ng-change="cart.checkBeforeSaveToLocalStorage(item.quantity,item.product_id)"
 												ng-model="item.quantity" type="number" size="4" value="1"
-												min="0" max="item.quantity" step="1" style="width: 100%"></td>
+												min="0" max="item.quantity" step="1" style="width: 100%" ></td>
 											<td class="text-center">{{item.unit_price | number :0}} Đ</td>
 											<td class="text-center">{{item.quantity*item.unit_price-((item.quantity*item.unit_price)*item.distcount/100)
 												| number:0}} Đ </td>
@@ -58,7 +58,6 @@
 									<div class="form-group">
 										<label for="voucher">Chọn mã giảm giá:</label>
 										<select class="form-control" id="voucher" ng-model="voucher.voucherCode" ng-model-options="{ debounce: 500 }" ng-change="voucher.saveVoucherCode()">
-											<option></option>
 											<option th:each="item : ${vouchers}" th:value="${item.voucherName}" th:text="${item.voucherName}"></option>
 										</select>
 <!--										<input type="text" class="form-control" id="voucher" ng-model="voucher.voucherCode"-->

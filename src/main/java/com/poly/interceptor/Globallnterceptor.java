@@ -24,7 +24,7 @@ public class Globallnterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private ColorServices colorServices;
-	// khai báo toàn chương trình hiển thị loại sản phẩm và thương hiệu
+	// khai báo toàn chương trình hiển thị loại sản phẩm
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

@@ -17,7 +17,9 @@ import com.poly.entity.Product;
 
 import com.poly.entity.ReportCategory;
 import com.poly.entity.ReportTrademark;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductDao extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 //	Page<Product> findByQuantityGreaterThan(Integer quantity,Pageable pageable);
 	@Query("SELECT p FROM Product p WHERE p.category.id=?1")
@@ -70,18 +72,11 @@ public interface ProductDao extends JpaRepository<Product, Integer>, JpaSpecific
 		@Query(value="select * from Products where Unit_price between ?1 and ?2 and Resolution like %?3% and Ram like %?4% and Rom like %?5% ",nativeQuery = true)
 		List<Product> find(@Param("MinPrice") Integer unit_price, @Param("MaxPrice") Integer unit_price1 ,
 				@Param("Resolution") String resolution, @Param("Ram") String ram, @Param("Rom") String rom);
-
+	
 //		@Query(value="select * from Products where Unit_price between ?1 and ?2 and Category_id like %?3% and Trademark_id like %?4% "
 //				+ "and Ram like %?5% and Rom like %?6% and Resolution like  %?7% ", nativeQuery = true)
 
-		@Query(value="SELECT *\n" +
-				"FROM Products\n" +
-				"WHERE Products.Unit_price BETWEEN ?1 AND ?2\n" +
-				"    AND Products.Category_id LIKE CONCAT('%', ?3, '%')\n" +
-				"    AND Products.Trademark_id LIKE CONCAT('%', ?4, '%')\n" +
-				"    AND Products.Size_id LIKE CONCAT('%', ?5, '%')\n" +
-				"    AND Products.Color_id LIKE CONCAT('%', ?6, '%')\n" +
-				"    AND Products.Material_id LIKE CONCAT('%', ?7, '%');\n", nativeQuery = true)
+		@Query(value="select * from Products ", nativeQuery = true)
 		List<Product> findByAllKeyWord(
 				@Param("MinPrice") Integer unit_price, @Param("MaxPrice") Integer unit_price1  ,
 					@Param("Category_id") String Category_id , @Param("Trademark_id") String Trademark_id , @Param("Size_id") String Size_id ,
@@ -92,7 +87,8 @@ public interface ProductDao extends JpaRepository<Product, Integer>, JpaSpecific
 		@Query(value = "select * from Products where Product_id like %:kw% or \r\n"
 				+ " Name like %:kw%  " , nativeQuery = true)
 		List<Product> finbyIdOrName(@Param("kw") String keywords);
-
+//		@Query(value="select * from Products where Unit_price between ?1 and ?2 and Category_id like %?3% and Trademark_id like %?4% "
+//				+ "and  Status like %?5% and Chip like %?6%  and Ram like %?7% and Rom like %?8% and Resolution like  %?9% ", nativeQuery = true)
 		@Query(value="select * from Products INNER JOIN product_detail on Products.Product_id = product_detail.ProductID " +
 				" where Products.Unit_price between ?1 and ?2 and Products.Category_id  like %?3% and Products.Trademark_id like %?4% " +
 				"   and  Products.Status like %?5% and product_detail.Chip like %?6%  and product_detail.Ram like %?7% " +

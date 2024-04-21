@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>QhShop-Admin</title>
+    <title>GoalShop-Admin</title>
 	
     <!-- Favicons -->
     <link href="/assets/admin/img/favicon.png" rel="icon">
@@ -236,24 +236,12 @@
         function validateForm() {
             var voucherPrice = document.getElementById("voucherPrice").value;
             var estimate = document.getElementById("estimate").value;
-            if (parseFloat(estimate) < parseFloat(voucherPrice)) {
-                alert("Giá mức áp dụng phải lớn hơn hoặc bằng giá voucher.");
+            if (parseFloat(voucherPrice) < parseFloat(estimate)) {
+                alert("Giá voucher phải lớn hơn hoặc bằng mức áp dụng.");
                 return false;
             }
             return true;
         }
-    </script>
-
-    <script>
-        // Add event listener to the select element
-        document.addEventListener('DOMContentLoaded', function () {
-            var selectElement = document.querySelector('select[name="size.Size_id"]');
-            selectElement.addEventListener('change', function () {
-                var selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
-                console.log('Selected Sizes:', selectedOptions);
-                // You can perform any other actions based on the selected options here
-            });
-        });
     </script>
 
 

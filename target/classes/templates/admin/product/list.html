@@ -101,54 +101,7 @@
 													</div>
 												</select>
 											</div>
-<!--											<div class="form-group col-sm-4">-->
-<!--												<div>Chip</div>-->
-<!--												<input type="text" name="Chip" class="form-control">-->
-<!--											</div>-->
-<!--											<div class="form-group col-sm-4">-->
-<!--												<div>Ram</div>-->
-<!--												<select class="form-control" name="Ram"-->
-<!--													data-live-search="true" style="height: 36px;">-->
-<!--													<option value="">Tất cả</option>-->
-<!--													<option value="2GB">2GB</option>-->
-<!--													<option value="4GB">4GB</option>-->
-<!--													<option value="8GB">8GB</option>-->
-<!--													<option value="12GB">12GB</option>-->
-<!--												</select>-->
-<!--											</div>-->
-<!--											<div class="form-group col-sm-4">-->
-<!--												<div>Bộ nhớ</div>-->
-<!--												<select class="form-control" name="Rom"-->
-<!--													data-live-search="true" style="height: 36px;">-->
-<!--													<option value="">Tất cả</option>-->
-<!--													<option value="1TB">1TB</option>-->
-<!--													<option value="512GB">512GB</option>-->
-<!--													<option value="256GB">256GB</option>-->
-<!--													<option value="128GB">128GB</option>-->
-<!--													<option value="64GB">64GB</option>-->
-<!--													<option value="32GB">32GB</option>-->
-<!--												</select>-->
-<!--											</div>-->
-<!--											<div class="form-group col-sm-4">-->
-<!--												<div>Tình trạng</div>-->
-<!--												<select class="form-control" name="Status"-->
-<!--													data-live-search="true" style="height: 36px;">-->
-<!--													<option value="">Tất cả</option>-->
-<!--													<option value="1">Hiển thị</option>-->
-<!--													<option value="0">Ẩn</option>-->
-<!--												</select>-->
-<!--											</div>-->
-<!--											<div class="form-group col-sm-4">-->
-<!--												<div>Màn hình</div>-->
-<!--												<select class="form-control" name="Resolution"-->
-<!--													data-live-search="true" style="height: 36px;">-->
-<!--													<option value="">Tất cả</option>-->
-<!--													<option value="2K">2K</option>-->
-<!--													<option value="4K">4K</option>-->
-<!--													<option value="6K">6K</option>-->
-<!--													<option value="8K">8K</option>-->
-<!--												</select>-->
-<!--											</div>-->
+
 											<div class="form-group col-sm-4">
 												<br>
 												<button class="btn btn-round btn-default" type="submit">Tìm
@@ -186,7 +139,7 @@
 								<td>&ensp;&ensp;[[${p.Product_id}]]</td>
 								<td>[[${p.Name}]]</td>
 								<td>[[${#numbers.formatDecimal(p.unit_price, 3 , 'COMMA',0,'POINT')}]] Đ</td>
-								<td>[[${p.quantity}]] Chiếc <span th:if="${p.quantity} < 11   ">
+								<td>[[${p.quantity}]]  <span th:if="${p.quantity} < 11   ">
 										<span class="label label-warning" th:if="${p.quantity} >0   ">Sắp
 											hết hàng</span>
 								</span> <span class="label label-danger" th:if="${p.quantity} == 0">Hết
@@ -203,22 +156,12 @@
 								<td>[[${p.material.Name}]]</td>
 								<td>[[${p.Size.name}]]</td>
 
-								<!-- 								<td><a th:if="${p.lastest}==true" -->
-								<!-- 									class="btn btn-round btn-success"><i class="fa fa-check"></i></a> -->
-								<!-- 									<a th:if="${p.lastest}==false" class="btn btn-round btn-danger"><i -->
-								<!-- 										class="fa fa-check"></i></a></td> -->
-								<!-- 								<td><a th:if="${p.special}==true" -->
-								<!-- 									class="btn btn-round btn-success"><i class="fa fa-check"></i></a> -->
-								<!-- 									<a th:if="${p.special}==false" class="btn btn-round btn-danger"><i -->
-								<!-- 										class="fa fa-check"></i></a></td> -->
+
 								<td><a 
 									th:href="@{|/admin/product/edit?product_id=${p.product_id}|}"
 									class="btn btn-round btn-primary"> <i class="fa fa-pencil"></i>
 								</a>
-<!--									<a  th:href="@{|/admin/product/delete/${p.product_id}|}"-->
-<!--									class="btn btn-round btn-danger"> <i class="fa fa-trash-o "></i>-->
-<!--										-->
-<!--								</a>-->
+
 								</td>
 							</tr>
 
@@ -272,15 +215,7 @@
 								><span aria-hidden="true">[[${currentIndex} +2]]</span>
 									<span class="sr-only">Previous</span></a>
 							</li>
-							
-<!-- 							<li -->
-<!-- 								th:each="item : ${#numbers.sequence(beginIndex,totalPageCount)}" -->
-<!-- 								th:class="${item == currentIndex ? 'page-item active' :'page-item' }"> -->
-<!-- 								<a  class="page-link" th:href="@{|${baseUrl}${item}|}"> <span -->
-<!-- 									th:text='${item}'></span> -->
-<!-- 							</a> -->
-<!-- 							</li> -->
-							
+
 							<li
 								th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
 								<a class="page-link" aria-label="Next"
