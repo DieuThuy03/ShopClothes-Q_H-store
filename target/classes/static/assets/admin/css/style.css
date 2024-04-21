@@ -386,7 +386,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #ADD8E6;
+    background: #778899;
 }
 
 #sidebar h5 {
@@ -567,7 +567,7 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #ADD8E6;
+    background: #778899;
     border-bottom: 1px solid #393d46;
 }
 
@@ -3487,7 +3487,7 @@ ul.chat-available-user li a:hover {
 
 /*footer*/
 .site-footer {
-    background: #4ECDC4;
+    background: #778899;
     color: #fff;
     padding: 15px 0;
 }

@@ -31,16 +31,13 @@
 								<span class="sales__product_new">
 						           <img alt="" src="https://cdn-icons-png.flaticon.com/512/179/179452.png">
 						        </span>
-								
+								</br>
+								</br>
 								<div class="caption product-detail text-center">
 									<h6 data-name="product_name" class="product-name mt_20">
 										<a href="#" title="Casual Shirt With Ruffle Hem"
 											th:utext="${l.name}" class="cdt-product__name"></a>
 									</h6>
-<!--									<div class="rating">-->
-<!--										<span class="rating1" title="RAM "> [[${l.ram}]] </span> <span-->
-<!--											class="rating2" title="Bộ nhớ trong "> [[${l.rom}]] </span>-->
-<!--									</div>-->
 									<span class="price">
 										<span th:if="${l.distcount} > 0">
 											<span class="amount" style="margin-left: 5px; text-decoration: line-through;">[[${#numbers.formatDecimal(l.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
@@ -97,16 +94,13 @@
 								<span class="sales__product" th:if="${d.distcount} > 0">
 						            <i class="fa fa-bolt" style="font-size:18px"></i> Giảm [[${#numbers.formatDecimal(d.distcount, 1 , 'COMMA',0,'POINT')}]] %
 						        </span>
-								
+								</br>
+								</br>
 								<div class="caption product-detail text-center">
 									<h6 data-name="product_name" class="product-name mt_20">
 										<a href="#" title="Casual Shirt With Ruffle Hem"
 											th:utext="${d.name}" class="cdt-product__name"></a>
 									</h6>
-<!--									<div class="rating">-->
-<!--										<span class="rating1" title="RAM "> [[${d.ram}]] </span> <span-->
-<!--											class="rating2" title="Bộ nhớ trong "> [[${d.rom}]] </span>-->
-<!--									</div>-->
 									<span class="price">
 										<span th:if="${d.distcount} > 0">
 											<span class="amount" style="margin-left: 5px; text-decoration: line-through;">[[${#numbers.formatDecimal(d.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ</span>
@@ -157,15 +151,13 @@
 										</a>
 									</div>
 								</div>
+								</br>
+								</br>
 								<div class="caption product-detail text-center">
 									<h6 data-name="product_name" class="product-name mt_20">
 										<a href="#" title="Casual Shirt With Ruffle Hem"
 											th:utext="${s.name}" class="cdt-product__name"></a>
 									</h6>
-									<div class="rating">
-										<span class="rating1" title="RAM "> [[${s.ram}]] </span> <span
-											class="rating2" title="Bộ nhớ trong "> [[${s.rom}]] </span>
-									</div>
 									<span class="price"><span class="amount">[[${#numbers.formatDecimal(s.unit_price, 3 , 'COMMA',0,'POINT')} ]] Đ
 									</span> </span>
 								</div>

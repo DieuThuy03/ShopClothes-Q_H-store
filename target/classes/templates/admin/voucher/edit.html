@@ -17,7 +17,7 @@
 					</h3>
 					<div class="panel-body">
 						<form th:action="@{/admin/voucher/edit}" method="post"
-							modelAttribute="voucher" enctype="multipart/form-data">
+							modelAttribute="voucher" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 							<div class="panel-heading text-center"
 								style="color: #54aee2; font-style: oblique; font-variant: inherit; font-weight: bolder;"></div>
@@ -36,14 +36,12 @@
 												   th:value="${voucher.voucherName}" class="form-control" required>
 										</div>
 										<div class="form-group col-sm-6">
-											<div>Mức giá áp dụng:</div>
-											<input type="number" name="estimate" th:value="${voucher.estimate}"
-												   class="form-control" required>
+											<div>Giá Voucher:</div>
+											<input type="number" id="voucherPrice" name="voucher_price" th:value="${voucher.voucher_price}" class="form-control" required>
 										</div>
 										<div class="form-group col-sm-6">
-											<div>Giá Voucher:</div>
-											<input type="number" name="voucher_price" th:value="${voucher.voucher_price}"
-												   class="form-control" required>
+											<div>Mức giá áp dụng:</div>
+											<input type="number" id="estimate" name="estimate" th:value="${voucher.estimate}" class="form-control" required>
 										</div>
 
 										<div class="form-group col-sm-6">

@@ -11,7 +11,6 @@
         <module name="DATN" />
         <module name="Mobie_Shop" />
         <module name="testcuoi" />
-        <module name="ShopClothesQ_Hstore" />
       </profile>
     </annotationProcessing>
   </component>
@@ -20,7 +19,6 @@
       <module name="DATN" options="-parameters" />
       <module name="GoalShop-1" options="-parameters" />
       <module name="Mobie_Shop" options="-parameters" />
-      <module name="ShopClothesQ_Hstore" options="-parameters" />
       <module name="testcuoi" options="-parameters" />
     </option>
   </component>

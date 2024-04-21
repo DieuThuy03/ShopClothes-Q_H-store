@@ -40,7 +40,7 @@ public class OrderAdminController {
 
 	@Autowired
 	OrderDetailDao otddao;
-    @Autowired
+	@Autowired
 	OrderDetailService service;
 
 
@@ -98,7 +98,7 @@ public class OrderAdminController {
 		return "/admin/order/list";
 	}
 
-//	@RequestMapping("/order/list")
+	//	@RequestMapping("/order/list")
 //	public String index(Model model){
 //		List<Order> list = odao.findByAllDesc();
 //		model.addAttribute("orders", list);
@@ -115,7 +115,7 @@ public class OrderAdminController {
 
 	@RequestMapping("/admin/order/findbyOrderId/{pageNumber}")
 	public String findIdorName(Model model, @RequestParam("order_id") String order_id, HttpServletRequest request,
-			@PathVariable int pageNumber) {
+							   @PathVariable int pageNumber) {
 		if (order_id.equals("")) {
 			return "redirect:/admin/order/list";
 		}
@@ -147,7 +147,7 @@ public class OrderAdminController {
 		return "/admin/order/list";
 	}
 
-//	@RequestMapping("/order/findbyOrderId")
+	//	@RequestMapping("/order/findbyOrderId")
 //	public String findbyOrderId(Model model , @RequestParam("order_id") String order_id) {
 //		try {
 //			List<Order> list = odao.findByOrder_Id(order_id);
@@ -164,9 +164,9 @@ public class OrderAdminController {
 //			model.addAttribute("message", "ID HOẶC TÊN SẢN PHẨM không tồn tại ");
 //			return "admin/order/list";
 //		}
-//		
+//
 //	}
-//	
+//
 	@RequestMapping("/admin/order/findallkeyword")
 	public String findallkeyword(Model model) {
 		List<Order> list = odao.findAll();
@@ -177,11 +177,11 @@ public class OrderAdminController {
 	@SuppressWarnings("deprecation")
 	@RequestMapping("/admin/order/findByAllkeyword/{pageNumber}")
 	public String findByAllkeyword(Model model, @RequestParam("Username") String username,
-			@RequestParam(value = "Minday", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date minday,
-			@RequestParam(value = "Maxday", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date maxday,
-			@RequestParam("Status") String Status, @RequestParam("Phone") String Phone,
-			@RequestParam("MinPrice") Integer unit_price, @RequestParam("MaxPrice") Integer unit_price1,
-			HttpServletRequest request, @PathVariable int pageNumber) {
+								   @RequestParam(value = "Minday", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date minday,
+								   @RequestParam(value = "Maxday", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date maxday,
+								   @RequestParam("Status") String Status, @RequestParam("Phone") String Phone,
+								   @RequestParam("MinPrice") Integer unit_price, @RequestParam("MaxPrice") Integer unit_price1,
+								   HttpServletRequest request, @PathVariable int pageNumber) {
 		if (minday == (null)) {
 			minday = new Date(2001 - 01 - 23);
 		}
@@ -236,7 +236,7 @@ public class OrderAdminController {
 	public String updateOrder(Model model, Order ord) {
 		if (odao.existsById(ord.getOrder_id())) {
 			if (ord.getStatus() == 1) {
-			
+
 				List<OrderDetail> listOrder = otddao.findByOrderID(ord.getOrder_id());
 				for (int i = 0; i < listOrder.size(); i++) {
 					Optional<Product> pro = prodao.findById(listOrder.get(i).getProduct().getProduct_id());
@@ -244,9 +244,9 @@ public class OrderAdminController {
 					prodao.save(pro.get());
 				}
 			}
-			
+
 			if (ord.getStatus() == 2) {
-			
+
 				List<OrderDetail> listOrder = otddao.findByOrderID(ord.getOrder_id());
 				for (int i = 0; i < listOrder.size(); i++) {
 					Optional<Product> pro = prodao.findById(listOrder.get(i).getProduct().getProduct_id());
@@ -256,10 +256,10 @@ public class OrderAdminController {
 			}
 			if (ord.getStatus() == 3) {
 				ord.setDescription("Đã thanh toán");
-				
+
 			}
 			model.addAttribute("message", "Thao tác thành công");
-			
+
 			odao.save(ord);
 			return "redirect:/admin/order/edit?order_id=" + ord.getOrder_id();
 		} else {
@@ -289,18 +289,18 @@ public class OrderAdminController {
 		msg.setText(
 				"	               HÓA ĐƠN "   +"\n"
 						+"\n"
-		+ "   Tên người đặt hàng : " + order.getAccount().getFullname()          + "   \n"
-		+ "   Phương thức thanh toán :  " + order.getMethod()                    + "   \n"
-		+ "   Sô điện thoại người đặt hàng : " + order.getPhone()                + "   \n"
-		+ "   Đơn hàng có giá trị :" + order.getPrice()                          + "   \n"
-		+ "   Loại tiền tệ : " + order.getCurrency()                             + "   \n"
-		+ "   Ngày tạo đơn : " + order.getCreateDate()                           + "   \n"
-		+ "   Tình trạng đơn hàng : " + sta                                      + "   \n"
-		+ "   Địa chỉ nhận hàng : " + order.getAddress() + "\n"
-				+ "\n"
-				+ "Cảm ơn bạn đã mua hàng tại GoalShop ❤ "
-		+ "\n"
-		+ "________________________________");
+						+ "   Tên người đặt hàng : " + order.getAccount().getFullname()          + "   \n"
+						+ "   Phương thức thanh toán :  " + order.getMethod()                    + "   \n"
+						+ "   Sô điện thoại người đặt hàng : " + order.getPhone()                + "   \n"
+						+ "   Đơn hàng có giá trị :" + order.getPrice()                          + "   \n"
+						+ "   Loại tiền tệ : " + order.getCurrency()                             + "   \n"
+						+ "   Ngày tạo đơn : " + order.getCreateDate()                           + "   \n"
+						+ "   Tình trạng đơn hàng : " + sta                                      + "   \n"
+						+ "   Địa chỉ nhận hàng : " + order.getAddress() + "\n"
+						+ "\n"
+						+ "Cảm ơn bạn đã mua hàng tại GoalShop ❤ "
+						+ "\n"
+						+ "________________________________");
 
 		msg.setSubject("Đơn hàng số : " + order.getOrder_id());
 		javaMailSender.send(msg);
@@ -369,67 +369,67 @@ public class OrderAdminController {
 	}
 
 
-//	Xóa và cập nhập product
-@RequestMapping(value = "/admin/order/deleteDetail/{orderdetail_id}", method = RequestMethod.POST)
-public String deleteOrderDetail(@PathVariable("orderdetail_id") Integer orderDetailId) {
-	Optional<OrderDetail> orderDetailOptional = otddao.findById(orderDetailId);
-	if (orderDetailOptional.isPresent()) {
-		OrderDetail deletedOrderDetail = orderDetailOptional.get();
-		Order order = deletedOrderDetail.getOrder();
-		Product product = deletedOrderDetail.getProduct();
-		Integer deletedQuantity = deletedOrderDetail.getQuantity();
-		Double deletedPrice = deletedOrderDetail.getPrice();
+	//	Xóa và cập nhập product
+	@RequestMapping(value = "/admin/order/deleteDetail/{orderdetail_id}", method = RequestMethod.POST)
+	public String deleteOrderDetail(@PathVariable("orderdetail_id") Integer orderDetailId) {
+		Optional<OrderDetail> orderDetailOptional = otddao.findById(orderDetailId);
+		if (orderDetailOptional.isPresent()) {
+			OrderDetail deletedOrderDetail = orderDetailOptional.get();
+			Order order = deletedOrderDetail.getOrder();
+			Product product = deletedOrderDetail.getProduct();
+			Integer deletedQuantity = deletedOrderDetail.getQuantity();
+			Double deletedPrice = deletedOrderDetail.getPrice();
 
-		// Xóa chi tiết đơn hàng
-		otddao.delete(deletedOrderDetail);
+			// Xóa chi tiết đơn hàng
+			otddao.delete(deletedOrderDetail);
 
-		// Cập nhật lại số lượng sản phẩm trong bảng Product
-		if (product != null) {
-			Integer currentQuantity = product.getQuantity();
-			product.setQuantity(currentQuantity + deletedQuantity);
+			// Cập nhật lại số lượng sản phẩm trong bảng Product
+			if (product != null) {
+				Integer currentQuantity = product.getQuantity();
+				product.setQuantity(currentQuantity + deletedQuantity);
+				prodao.save(product);
+			}
+
+			// Cập nhật lại tổng giá của đơn hàng
+			Double currentOrderPrice = order.getPrice();
+			Double updatedOrderPrice = currentOrderPrice - deletedPrice;
+			order.setPrice(updatedOrderPrice);
+			odao.save(order);
+
+			return "redirect:/admin/order/edit?order_id=" + order.getOrder_id();
+		} else {
+			// Xử lý trường hợp không tìm thấy chi tiết đơn hàng
+			return "redirect:/admin/order";
+		}
+	}
+
+
+
+	@PostMapping("/admin/order/addProductToOrder")
+	public String addProductToOrder(@RequestParam("productId") Integer productId, @RequestParam("quantity") Integer quantity) {
+		Product product = prodao.findById(productId).orElse(null);
+		if (product != null && product.getQuantity() >= quantity) {
+			// Tạo mới hoặc cập nhật OrderDetail
+			OrderDetail existingOrderDetail = otddao.findByProduct(product);
+			if (existingOrderDetail != null) {
+				existingOrderDetail.setQuantity(existingOrderDetail.getQuantity() + quantity);
+				existingOrderDetail.setPrice(existingOrderDetail.getPrice() + (product.getUnit_price() * quantity));
+				otddao.save(existingOrderDetail);
+			} else {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setProduct(product);
+				orderDetail.setQuantity(quantity);
+				orderDetail.setPrice(product.getUnit_price() * quantity);
+				otddao.save(orderDetail);
+			}
+
+			// Cập nhật số lượng sản phẩm trong bảng Product
+			product.setQuantity(product.getQuantity() - quantity);
 			prodao.save(product);
 		}
-
-		// Cập nhật lại tổng giá của đơn hàng
-		Double currentOrderPrice = order.getPrice();
-		Double updatedOrderPrice = currentOrderPrice - deletedPrice;
-		order.setPrice(updatedOrderPrice);
-		odao.save(order);
-
-		return "redirect:/admin/order/edit?order_id=" + order.getOrder_id();
-	} else {
-		// Xử lý trường hợp không tìm thấy chi tiết đơn hàng
-		return "redirect:/admin/order";
+		// Redirect hoặc trả về view tùy thuộc vào yêu cầu của bạn
+		return "redirect:/admin/order/detail";
 	}
-}
-
-
-
-@PostMapping("/admin/order/addProductToOrder")
-public String addProductToOrder(@RequestParam("productId") Integer productId, @RequestParam("quantity") Integer quantity) {
-	Product product = prodao.findById(productId).orElse(null);
-	if (product != null && product.getQuantity() >= quantity) {
-		// Tạo mới hoặc cập nhật OrderDetail
-		OrderDetail existingOrderDetail = otddao.findByProduct(product);
-		if (existingOrderDetail != null) {
-			existingOrderDetail.setQuantity(existingOrderDetail.getQuantity() + quantity);
-			existingOrderDetail.setPrice(existingOrderDetail.getPrice() + (product.getUnit_price() * quantity));
-			otddao.save(existingOrderDetail);
-		} else {
-			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setProduct(product);
-			orderDetail.setQuantity(quantity);
-			orderDetail.setPrice(product.getUnit_price() * quantity);
-			otddao.save(orderDetail);
-		}
-
-		// Cập nhật số lượng sản phẩm trong bảng Product
-		product.setQuantity(product.getQuantity() - quantity);
-		prodao.save(product);
-	}
-	// Redirect hoặc trả về view tùy thuộc vào yêu cầu của bạn
-	return "redirect:/admin/order/detail";
-}
 	@RequestMapping("/admin/order/edit")
 	public String orderDetail(Model model, @RequestParam("order_id") Integer order_id) {
 		Order ListOrder = odao.findById(order_id).get();

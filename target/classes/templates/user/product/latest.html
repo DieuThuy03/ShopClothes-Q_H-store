@@ -20,22 +20,19 @@
                 <div class="col-sm-12">
                     <div class="brand owl-carousel ">
                         <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=1}">Dior</a>
+                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=1}">360 Boutique</a>
                         </div>
                         <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=2}">Gucci</a>
+                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=2}">Yame</a>
                         </div>
                         <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=3}">Channel</a>
+                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=3}">Biluxury</a>
                         </div>
                         <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=4}">Lv</a>
+                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=4}">Coolmate</a>
                         </div>
                         <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=5}">Hermes</a>
-                        </div>
-                        <div class="item text-center">
-                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=6}">Burberry</a>
+                            <a class="box-quicklink__item" th:href="@{/product/list/findByTrademarkId/1?tid=5}">5S Fashion</a>
                         </div>
 
                     </div>
@@ -89,15 +86,13 @@
                         <span class="sales__product" th:if="${p.distcount} > 0">
 				            <i class="fa fa-bolt" style="font-size:18px"></i> Giảm [[${#numbers.formatDecimal(p.distcount, 1 , 'COMMA',0,'POINT')}]] %
 				        </span>
+                        </br>
+                        </br>
                         <div class="caption product-detail text-center">
                             <h6 data-name="product_name" class="product-name mt_20">
                                 <a href="#" title="Casual Shirt With Ruffle Hem" th:utext="${p.name}"
                                    class="cdt-product__name"></a>
                             </h6>
-                            <!--							<div class="rating">-->
-                            <!--								<span class="rating1" title="RAM "> [[${p.ram}]] </span> -->
-                            <!--								<span class="rating2" title="Bộ nhớ trong ">  [[${p.rom}]] </span> -->
-                            <!--							</div>-->
                             <span class="price">
 								<span class="amount">
 									<span th:if="${p.distcount} > 0">

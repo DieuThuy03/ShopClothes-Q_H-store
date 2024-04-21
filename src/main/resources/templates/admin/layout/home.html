@@ -8,7 +8,7 @@
 <meta name="author" content="Dashboard">
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>GoalShop-Admin</title>
+<title>QhShop-Admin</title>
 
 <!-- Favicons -->
 <link href="/assets/admin/img/favicon.png" rel="icon">
@@ -54,91 +54,91 @@
 		<div th:replace="/admin/layout/_header.html"></div>
 		<div th:replace="/admin/layout/_aside.html"></div>
 		<section id="main-content">
-<!--			<section class="wrapper">-->
+			<section class="wrapper">
 
-<!--				<div class="row">-->
-<!--					<div class="col-12">-->
-<!--						<div class="box bg-gradient-primary overflow-hidden pull-up">-->
-<!--							<div class="box-body pr-0 pl-lg-50 pl-15 py-0">-->
-<!--								<div class="row align-items-center">-->
-<!--									<div class="col-12 col-lg-8">-->
-<!--										<h1 class="font-size-40 text-white">Xin chào-->
-<!--											[[${#request.remoteUser}]]!</h1>-->
-<!--										<p class="text-white mb-0 font-size-20">Uy tín - Chất Lượng - Tiện dụng - Bảo mật </p>-->
-<!--									</div>-->
-<!--									<div class="col-12 col-lg-4">-->
-<!--										<img style="width: 70%;"-->
-<!--											src="/assets/images/logo_transparent.png" alt="">-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
+				<div class="row">
+					<div class="col-12">
+						<div class="box bg-gradient-primary overflow-hidden pull-up">
+							<div class="box-body pr-0 pl-lg-50 pl-15 py-0">
+								<div class="row align-items-center">
+									<div class="col-12 col-lg-8">
+										<h1 class="font-size-40 text-white">Xin chào
+											[[${#request.remoteUser}]]!</h1>
+										<p class="text-white mb-0 font-size-20">Uy tín - Chất Lượng - Tiện dụng - Bảo mật </p>
+									</div>
+									<div class="col-12 col-lg-4">
+										<img style="width: 70%;"
+											src="/assets/images/logo_transparent.png" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-<!--				<div class="row" ng-controller="iconadmin-ctrl">-->
-<!--					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
-<!--						<div class="box pull-up">-->
-<!--							<div class="custom-box1">-->
-<!--								<div style="height: 70px;" ng-click="product()">-->
-<!--									<div class="col-sm-8 col-xs-6 ">-->
-<!--										<div class="grey-header">-->
-<!--											<h5>Sản phẩm trong kho</h5>-->
-<!--										</div>-->
-<!--										<p>Số mặt hàng: [[${prosize}]]</p>-->
-<!--									</div>-->
-<!--									<div class="col-sm-4 col-xs-6">-->
-<!--										<div style="margin-left: -25px" class="icon_admin">-->
-<!--											<i class="fa fa-mobile-phone"-->
-<!--												style="font-size: 64px; color: #4ecdc4;"></i>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
+				<div class="row" ng-controller="iconadmin-ctrl">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<div class="box pull-up">
+							<div class="custom-box1">
+								<div style="height: 70px;" ng-click="product()">
+									<div class="col-sm-8 col-xs-6 ">
+										<div class="grey-header">
+											<h5>Sản phẩm trong kho</h5>
+										</div>
+										<p>Số mặt hàng: [[${prosize}]]</p>
+									</div>
+									<div class="col-sm-4 col-xs-6">
+										<div style="margin-left: -25px" class="icon_admin">
+											<i class="fa fa-mobile-phone"
+												style="font-size: 64px; color: #4ecdc4;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-<!--					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
-<!--						<div class="box pull-up">-->
-<!--							<div class="custom-box1 ">-->
-<!--								<div style="height: 70px;" ng-click="order()">-->
-<!--									<div class="col-sm-8 col-xs-6 ">-->
-<!--										<div class="grey-header">-->
-<!--											<h5>Đơn hàng</h5>-->
-<!--										</div>-->
-<!--										<p>Số đơn hàng: [[${ordersize}]]</p>-->
-<!--									</div>-->
-<!--									<div class="col-sm-4 col-xs-6">-->
-<!--										<div style="margin-left: -25px" class="icon_admin_2">-->
-<!--											<i class="fa fa-shopping-cart"-->
-<!--												style="font-size: 46px; color: #8075c4;"></i>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<div class="box pull-up">
+							<div class="custom-box1 ">
+								<div style="height: 70px;" ng-click="order()">
+									<div class="col-sm-8 col-xs-6 ">
+										<div class="grey-header">
+											<h5>Đơn hàng</h5>
+										</div>
+										<p>Số đơn hàng: [[${ordersize}]]</p>
+									</div>
+									<div class="col-sm-4 col-xs-6">
+										<div style="margin-left: -25px" class="icon_admin_2">
+											<i class="fa fa-shopping-cart"
+												style="font-size: 46px; color: #8075c4;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-<!--					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
-<!--						<div class="box pull-up">-->
-<!--							<div class="custom-box1 ">-->
-<!--								<div style="height: 70px;" ng-click="account()">-->
-<!--									<div class="col-sm-8 col-xs-6 ">-->
-<!--										<div class="grey-header">-->
-<!--											<h5>Khách hàng</h5>-->
-<!--										</div>-->
-<!--										<p>Số khách hàng: [[${accsize}]]</p>-->
-<!--									</div>-->
-<!--									<div class="col-sm-4 col-xs-6">-->
-<!--										<div style="margin-left: -25px" class="icon_admin_3">-->
-<!--											<i class="fa fa-users"-->
-<!--												style="font-size: 40px; color: #FCB322;"></i>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<div class="box pull-up">
+							<div class="custom-box1 ">
+								<div style="height: 70px;" ng-click="account()">
+									<div class="col-sm-8 col-xs-6 ">
+										<div class="grey-header">
+											<h5>Khách hàng</h5>
+										</div>
+										<p>Số khách hàng: [[${accsize}]]</p>
+									</div>
+									<div class="col-sm-4 col-xs-6">
+										<div style="margin-left: -25px" class="icon_admin_3">
+											<i class="fa fa-users"
+												style="font-size: 40px; color: #FCB322;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 <!--					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
 <!--						<div class="box pull-up">-->
@@ -160,158 +160,158 @@
 <!--							</div>-->
 <!--						</div>-->
 <!--					</div>-->
-<!--				</div>-->
+				</div>
 
 
-<!--				<div class="row">-->
-<!--					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"-->
-<!--						ng-controller="ordertop10-ctrl">-->
-<!--						<div class="custom-box" style="width: 535px;overflow-x: auto;min-width: 405px">-->
-<!--							<div class="servicetitle text-center">-->
-<!--								<h3>Đơn hàng mới</h3>-->
-<!--								<hr>-->
-<!--							</div>-->
-<!--							<div class="icn-main-container text-center">-->
-<!--								<span class="icn-container box">Top 10</span>-->
-<!--							</div>-->
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+						ng-controller="ordertop10-ctrl">
+						<div class="custom-box" style="width: 535px;overflow-x: auto;min-width: 405px">
+							<div class="servicetitle text-center">
+								<h3>Đơn hàng mới</h3>
+								<hr>
+							</div>
+							<div class="icn-main-container text-center">
+								<span class="icn-container box">Top 10</span>
+							</div>
 
-<!--							<table class="table  ">-->
+							<table class="table  ">
 
-<!--								<hr>-->
-<!--								<thead>-->
-<!--									<tr>-->
+								<hr>
+								<thead>
+									<tr>
 
-<!--										<th><i class="fa fa-barcode"></i> Mã đơn hàng</th>-->
-<!--										<th><i class="fa fa-money"></i> Tổng tiền</th>-->
-<!--										<th><i class="fa fa-user"></i> Người mua</th>-->
+										<th><i class="fa fa-barcode"></i> Mã đơn hàng</th>
+										<th><i class="fa fa-money"></i> Tổng tiền</th>
+										<th><i class="fa fa-user"></i> Người mua</th>
 
-<!--									</tr>-->
-<!--								</thead>-->
-<!--								<tbody>-->
-<!--									<tr class="box pull-up-1" ng-repeat="item in items"-->
-<!--										ng-dblclick="edit(item.order_id)">-->
-<!--										<td class="text-center"> {{item.order_id}}</td>-->
-<!--										<td>{{item.price | number:0}} Đ</td>-->
-<!--										<td><span class="badge bg-primary">{{item.account.fullname}}</span></td>-->
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="box pull-up-1" ng-repeat="item in items"
+										ng-dblclick="edit(item.order_id)">
+										<td class="text-center"> {{item.order_id}}</td>
+										<td>{{item.price | number:0}} Đ</td>
+										<td><span class="badge bg-primary">{{item.account.fullname}}</span></td>
 
-<!--									</tr>-->
-<!--								</tbody>-->
-
-
-<!--							</table>-->
-
-<!--							<div class="text-center">-->
-<!--								<a class="btn btn-round  btn-theme"-->
-<!--									th:href="@{/admin/order/list}">Xem thêm</a>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						&lt;!&ndash; end custombox &ndash;&gt;-->
-<!--					</div>-->
-<!--					&lt;!&ndash; end col-4 &ndash;&gt;-->
-<!--					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-controller="producttop10-ctrl">-->
-<!--						<div class="custom-box">-->
-<!--							<div class="servicetitle text-center">-->
-<!--								<h3>Sản Phẩm Bán Chạy</h3>-->
-<!--								<hr>-->
-<!--							</div>-->
-<!--							<div class="icn-main-container text-center">-->
-<!--								<span class="icn-container box">Top 10</span>-->
-<!--							</div>-->
-
-<!--							<table class="table  ">-->
-
-<!--								<hr>-->
-<!--								<thead>-->
-<!--									<tr>-->
-
-<!--										<th><i class="fa fa-inbox"></i> Tên sản phẩm</th>-->
-<!--										<th class="text-center"><i class="fa fa-code-fork"></i>-->
-<!--											Số lượng bán</th>-->
-<!--									</tr>-->
-<!--								</thead>-->
-<!--								<tbody>-->
-<!--									<tr class="box pull-up-1" ng-repeat="item in items"-->
-<!--										ng-dblclick="edit(item.product_id)">-->
-
-<!--										<td>&ensp;{{item.name}}</td>-->
-<!--										<td class="text-center">{{item.count}}</td>-->
-
-<!--									</tr>-->
-<!--								</tbody>-->
-<!--							</table>-->
-<!--							<div class="text-center">-->
-<!--								<a class="btn btn-round  btn-theme"-->
-<!--									th:href="@{/admin/product/list}">Xem thêm</a>-->
-<!--							</div>-->
-
-<!--						</div>-->
-<!--						&lt;!&ndash; end custombox &ndash;&gt;-->
-<!--					</div>-->
-<!--					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"-->
-<!--						ng-controller="orderstatus-ctrl">-->
-<!--						<div class="custom-box">-->
-<!--							<div class="servicetitle text-center">-->
-<!--								<h3>Đơn hàng chưa xử lý</h3>-->
-<!--								<hr>-->
-<!--							</div>-->
-<!--							<div class="icn-main-container text-center">-->
-<!--								<span class="icn-container box">{{pager.sumorder}}</span>-->
-<!--							</div>-->
-
-<!--							<table class="table  ">-->
-
-<!--								<hr>-->
-<!--								<thead>-->
-<!--									<tr>-->
-
-<!--										<th><i class="fa fa-barcode"></i> Mã đơn hàng</th>-->
-<!--										<th><i class="fa fa-user"></i> Người mua</th>-->
-<!--										<th><i class="fa fa-clock-o"></i> Ngày đặt</th>-->
-<!--									</tr>-->
-<!--								</thead>-->
-<!--								<tbody>-->
-<!--									<tr class="box pull-up-1" ng-repeat="item in pager.items"-->
-<!--										ng-dblclick="edit(item.order_id)">-->
-
-<!--										<td class="text-center"> {{item.order_id}}</td>-->
-<!--										<td><span class="badge bg-warning">{{item.account.fullname}}</span></td>-->
-<!--										<td>{{item.createDate | date : 'dd-MM | HH:mm'}}</td>-->
-
-<!--									</tr>-->
-<!--								</tbody>-->
-<!--							</table>-->
-<!--							<div class=" text-center">-->
-<!--								<button ng-click="pager.first()" class="btn btn-theme03">-->
-<!--									<b class="glyphicon glyphicon-hand-up"></b>-->
-<!--								</button>-->
-<!--								<button ng-click="pager.prev()" class="btn btn-theme03">-->
-<!--									<b class="glyphicon glyphicon-hand-left"></b>-->
-<!--								</button>-->
-<!--								<button class="btn btn-theme03">{{pager.page + 1}} of-->
-<!--									{{pager.count}}</button>-->
-<!--								<button ng-click="pager.next()" class="btn btn-theme03">-->
-<!--									<b class="glyphicon glyphicon-hand-right"></b>-->
-<!--								</button>-->
-<!--								<button ng-click="pager.last()" class="btn btn-theme03">-->
-<!--									<b class="glyphicon glyphicon-hand-down"></b>-->
-<!--								</button>-->
-<!--								<a class="btn btn-round  btn-theme"-->
-<!--									th:href="@{/admin/order/list}">Xem thêm</a>-->
-
-<!--							</div>-->
-
-<!--						</div>-->
-<!--						&lt;!&ndash; end custombox &ndash;&gt;-->
-<!--					</div>-->
+									</tr>
+								</tbody>
 
 
+							</table>
 
-<!--					&lt;!&ndash; /col-lg-3 &ndash;&gt;-->
-<!--				</div>-->
-<!--				<br>-->
+							<div class="text-center">
+								<a class="btn btn-round  btn-theme"
+									th:href="@{/admin/order/list}">Xem thêm</a>
+							</div>
+						</div>
+						<!-- end custombox -->
+					</div>
+					<!-- end col-4 -->
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-controller="producttop10-ctrl">
+						<div class="custom-box">
+							<div class="servicetitle text-center">
+								<h3>Sản Phẩm Bán Chạy</h3>
+								<hr>
+							</div>
+							<div class="icn-main-container text-center">
+								<span class="icn-container box">Top 10</span>
+							</div>
 
-<!--				<div th:replace="/admin/layout/faq.html"></div>-->
-<!--			</section>-->
+							<table class="table  ">
+
+								<hr>
+								<thead>
+									<tr>
+
+										<th><i class="fa fa-inbox"></i> Tên sản phẩm</th>
+										<th class="text-center"><i class="fa fa-code-fork"></i>
+											Số lượng bán</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="box pull-up-1" ng-repeat="item in items"
+										ng-dblclick="edit(item.product_id)">
+
+										<td>&ensp;{{item.name}}</td>
+										<td class="text-center">{{item.count}}</td>
+
+									</tr>
+								</tbody>
+							</table>
+							<div class="text-center">
+								<a class="btn btn-round  btn-theme"
+									th:href="@{/admin/product/list}">Xem thêm</a>
+							</div>
+
+						</div>
+						<!-- end custombox -->
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+						ng-controller="orderstatus-ctrl">
+						<div class="custom-box">
+							<div class="servicetitle text-center">
+								<h3>Đơn hàng chưa xử lý</h3>
+								<hr>
+							</div>
+							<div class="icn-main-container text-center">
+								<span class="icn-container box">{{pager.sumorder}}</span>
+							</div>
+
+							<table class="table  ">
+
+								<hr>
+								<thead>
+									<tr>
+
+										<th><i class="fa fa-barcode"></i> Mã đơn hàng</th>
+										<th><i class="fa fa-user"></i> Người mua</th>
+										<th><i class="fa fa-clock-o"></i> Ngày đặt</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="box pull-up-1" ng-repeat="item in pager.items"
+										ng-dblclick="edit(item.order_id)">
+
+										<td class="text-center"> {{item.order_id}}</td>
+										<td><span class="badge bg-warning">{{item.account.fullname}}</span></td>
+										<td>{{item.createDate | date : 'dd-MM | HH:mm'}}</td>
+
+									</tr>
+								</tbody>
+							</table>
+							<div class=" text-center">
+								<button ng-click="pager.first()" class="btn btn-theme03">
+									<b class="glyphicon glyphicon-hand-up"></b>
+								</button>
+								<button ng-click="pager.prev()" class="btn btn-theme03">
+									<b class="glyphicon glyphicon-hand-left"></b>
+								</button>
+								<button class="btn btn-theme03">{{pager.page + 1}} of
+									{{pager.count}}</button>
+								<button ng-click="pager.next()" class="btn btn-theme03">
+									<b class="glyphicon glyphicon-hand-right"></b>
+								</button>
+								<button ng-click="pager.last()" class="btn btn-theme03">
+									<b class="glyphicon glyphicon-hand-down"></b>
+								</button>
+								<a class="btn btn-round  btn-theme"
+									th:href="@{/admin/order/list}">Xem thêm</a>
+
+							</div>
+
+						</div>
+						<!-- end custombox -->
+					</div>
+
+
+
+					<!-- /col-lg-3 -->
+				</div>
+				<br>
+
+				<div th:replace="/admin/layout/faq.html"></div>
+			</section>
 		</section>
 		<div th:replace="/admin/layout/_footer.html"></div>
 	</section>
@@ -408,6 +408,11 @@
 	
 	
 	
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('.js-example-basic-multiple').select2();
+		});
 	</script>
 
 

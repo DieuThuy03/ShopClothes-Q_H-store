@@ -6,19 +6,17 @@ import java.util.List;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+import lombok.Data;
+
+
 @SuppressWarnings("serial")
 @Data
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@Entity 
 @Table(name = "Products")
 public class Product implements Serializable {
 	

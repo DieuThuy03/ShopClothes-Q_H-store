@@ -19,14 +19,14 @@ public interface OrderService {
 	Order findById(Integer id);
 
 	List<Order> findByUsername(String username);
-	
+
 	List<Order> findByAllDesc();
 
 	void deleteById(Integer id);
 
 	Order update(Order order);
 	List<Order> findByStatus(int status);
-    BillDTO getBillDetail(int idOrder);
+	BillDTO getBillDetail(int idOrder);
 
 	public void addProductToOrder(Order order, Product product, int quantity);
 

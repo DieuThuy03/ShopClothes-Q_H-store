@@ -19,18 +19,18 @@ import com.paypal.base.rest.PayPalRESTException;
 
 @Service
 public class PaypalService {
-	
+
 	@Autowired
 	private APIContext apiContext;
-	
-	
+
+
 	public Payment createPayment(
-			Double total, 
-			String currency, 
+			Double total,
+			String currency,
 			String method,
 			String intent,
-			String description, 
-			String cancelUrl, 
+			String description,
+			String cancelUrl,
 			String successUrl) throws PayPalRESTException{
 		Amount amount = new Amount();
 		amount.setCurrency(currency);
@@ -48,7 +48,7 @@ public class PaypalService {
 
 		Payment payment = new Payment();
 		payment.setIntent(intent.toString());
-		payment.setPayer(payer);  
+		payment.setPayer(payer);
 		payment.setTransactions(transactions);
 		RedirectUrls redirectUrls = new RedirectUrls();
 		redirectUrls.setCancelUrl(cancelUrl);
@@ -57,7 +57,7 @@ public class PaypalService {
 
 		return payment.create(apiContext);
 	}
-	
+
 	public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
 		Payment payment = new Payment();
 		payment.setId(paymentId);
@@ -65,7 +65,7 @@ public class PaypalService {
 		paymentExecute.setPayerId(payerId);
 		return payment.execute(apiContext, paymentExecute);
 	}
-	
-	
+
+
 
 }

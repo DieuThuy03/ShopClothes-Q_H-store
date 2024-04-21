@@ -132,7 +132,7 @@ public class ProductServiceImlq implements ProductService {
 		return updatedProducts;
 	}
 
-//	@Override
+	//	@Override
 //	public Product findById(Integer id) {
 //
 //		Product product =  pdao.findById(id).get();
@@ -143,19 +143,19 @@ public class ProductServiceImlq implements ProductService {
 //		}
 //		return product;
 //	}
-@Override
-public Product findById(Integer id) {
-	Optional<Product> optionalProduct = pdao.findById(id);
-	if (optionalProduct.isPresent()) {
-		Product product = optionalProduct.get();
-		ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
-		List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
-		this.updateInformationProduct(product, detail, images);
-		return product;
-	} else {
-		return null; // hoặc throw exception tùy theo yêu cầu của bạn
+	@Override
+	public Product findById(Integer id) {
+		Optional<Product> optionalProduct = pdao.findById(id);
+		if (optionalProduct.isPresent()) {
+			Product product = optionalProduct.get();
+			ProductDetail detail = productDetailDao.findByProductID(product.getProduct_id());
+			List<ImageProduct> images = imageProductDao.findByProductID(product.getProduct_id());
+			this.updateInformationProduct(product, detail, images);
+			return product;
+		} else {
+			return null; // hoặc throw exception tùy theo yêu cầu của bạn
+		}
 	}
-}
 
 
 	@Override
@@ -167,7 +167,7 @@ public Product findById(Integer id) {
 	@Override
 	public List<Product> findByCategoryId(Integer cid) {
 		// TODO Auto-generated method stub
-	//	return pdao.findByCategoryId(cid);
+		//	return pdao.findByCategoryId(cid);
 
 		List<Product> updatedProducts = pdao.findByCategoryId(cid).stream()
 				.map(product -> {
@@ -196,7 +196,7 @@ public Product findById(Integer id) {
 	@Override
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		 pdao.deleteById(id);;
+		pdao.deleteById(id);;
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public Product findById(Integer id) {
 	@Override
 	public List<Product> findByKeywords(String keywords) {
 		// TODO Auto-generated method stub
-	//	return pdao.findByKeywords(keywords);
+		//	return pdao.findByKeywords(keywords);
 
 		List<Product> updatedProducts = pdao.findByKeywords(keywords).stream()
 				.map(product -> {
@@ -241,7 +241,7 @@ public Product findById(Integer id) {
 	@Override
 	public List<Product> findByLaptop() {
 		// TODO Auto-generated method stub
-	//	return pdao.findByLaptop();
+		//	return pdao.findByLaptop();
 
 		List<Product> updatedProducts = pdao.findByLaptop().stream()
 				.map(product -> {
@@ -267,7 +267,7 @@ public Product findById(Integer id) {
 			byte[] data = file.getBytes();
 			bufferedOutputStream.write(data);
 			bufferedOutputStream.close();
-			
+
 			File dir = new File(request.getServletContext().getRealPath(path));
 			if(!dir.exists()) {
 				dir.mkdirs();

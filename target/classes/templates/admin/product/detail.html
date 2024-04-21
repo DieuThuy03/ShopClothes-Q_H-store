@@ -18,7 +18,36 @@
 				<div class="panel-body">
 					<form th:action="@{/admin/product/create}" method="post" modelAttribute="pro" enctype="multipart/form-data">
 						<div class="row">
-
+							<!--					<div class="col-sm-4 text-center">-->
+							<!--						<label for="image1"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image1}|}"-->
+							<!--							style="max-width: 100%; height: 200px;" alt="ảnh 1">-->
+							<!--						</label>-->
+							<!--						<label for="image2"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image2}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 2">-->
+							<!--						</label>-->
+							<!--						<label for="image3"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image3}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 3">-->
+							<!--						</label>-->
+							<!--						<label for="image4"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image4}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 4">-->
+							<!--						</label>-->
+							<!--						<label for="image5"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image5}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 5">-->
+							<!--						</label>-->
+							<!--						<label for="image6"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image6}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 6">-->
+							<!--						</label>-->
+							<!--						<label for="image7"> <img-->
+							<!--							th:src="@{|/assets/images/${pro.Image7}|}"-->
+							<!--							style="max-width: 50%; height: 100px;" alt="ảnh 7">-->
+							<!--						</label>-->
+							<!--					</div>-->
 							<div class="col-sm-8">
 								<div class="row">
 									<div class="form-group col-sm-6">
@@ -73,23 +102,15 @@
 										</select>
 									</div>
 									<!--	--------------------Size------------------------------------------->
-<!--									<div class="form-group col-sm-6">-->
-<!--										<div>Size</div>-->
-<!--										<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;"  >-->
-
-<!--											<div class="form-group selectpicker show-tick" th:each="s,state:${size}">-->
-<!--												<option th:value="${s.Size_id}" >[[${s.name}]]</option>-->
-<!--											</div>-->
-<!--										</select>-->
-<!--									</div>-->
-
 									<div class="form-group col-sm-6">
 										<div>Size</div>
-										<select name="size.Size_id" multiple data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;">
-											<option th:each="s : ${size}" th:if="${s != null and s.name != null}" th:value="${s.Size_id}" th:text="${s.name}" th:checked="${s.selected}"></option>
+										<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" multiple="multiple">
+
+											<div class="form-group selectpicker show-tick" th:each="s,state:${size}">
+												<option th:value="${s.Size_id}" >[[${s.name}]]</option>
+											</div>
 										</select>
 									</div>
-
 
 									<!--	--------------------Material------------------------------------------->
 									<div class="form-group col-sm-6">
@@ -128,7 +149,38 @@
 										<input type="text" name="Description" th:value="${pro.Description}"
 											   class="form-control" required>
 									</div>
-
+									<!--							<div class="form-group col-sm-6">-->
+									<!--								<div>Chip</div>-->
+									<!--								<input type="text" name="Chip" th:value="${pro.Chip}"-->
+									<!--									class="form-control" required>-->
+									<!--							</div>-->
+									<!--							<div class="form-group col-sm-6">-->
+									<!--								<div>Ram</div>-->
+									<!--								<input type="text" name="Ram" th:value="${pro.Ram}"-->
+									<!--									class="form-control" required>-->
+									<!--&lt;!&ndash;								<select id="Ram">&ndash;&gt;-->
+									<!--&lt;!&ndash;									<option value="volvo">4GB</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;									<option value="saab">8GB</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;									<option value="vw">16GB</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;									<option value="audi" selected>32GB</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;									<option value="audi" >64GB</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;								</select>&ndash;&gt;-->
+									<!--							</div>-->
+									<!--							<div class="form-group col-sm-6">-->
+									<!--								<div>Bộ nhớ</div>-->
+									<!--								<input type="text" name="Rom" th:value="${pro.Rom}"-->
+									<!--									class="form-control" required>-->
+									<!--							</div>-->
+									<!--							<div class="form-group col-sm-6">-->
+									<!--								<div>Màn hình</div>-->
+									<!--								<input type="text" name="Resolution" th:value="${pro.Resolution}"-->
+									<!--									class="form-control" required>-->
+									<!--							</div>-->
+									<!--							<div class="form-group col-sm-6">-->
+									<!--								<div>Pin</div>-->
+									<!--								<input type="text" name="Pin" th:value="${pro.Pin}"-->
+									<!--									class="form-control" required>-->
+									<!--							</div>-->
 									<div class="form-group col-sm-6">
 										<div>Khuyến mãi</div>
 										<input type="number" name="Distcount" th:value="${pro.Distcount}"
@@ -189,26 +241,5 @@
 		</div>
 	</div>
 </main>
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var select = document.getElementById('multiSelect');
-		select.addEventListener('change', function() {
-			var selectedValues = [];
-			var options = select && select.options;
-			var opt;
-
-			for (var i=0; i<options.length; i++) {
-				opt = options[i];
-
-				if (opt.selected) {
-					selectedValues.push(opt.value);
-				}
-			}
-
-			console.log(selectedValues); // In ra các giá trị đã chọn để kiểm tra
-			// Bạn có thể thực hiện các xử lý khác với các giá trị đã chọn ở đây
-		});
-	});
-</script>
 </body>
 </html>

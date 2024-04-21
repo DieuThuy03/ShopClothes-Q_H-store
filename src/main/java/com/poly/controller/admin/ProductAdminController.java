@@ -124,7 +124,7 @@ public class ProductAdminController {
 
 	@RequestMapping("/admin/product/findIdorName/{pageNumber}")
 	public String findIdorName(Model model, @RequestParam("keyword") String keyword, HttpServletRequest request,
-			@PathVariable int pageNumber) {
+							   @PathVariable int pageNumber) {
 		if (keyword.equals("")) {
 			return "redirect:/admin/product/list";
 		}
@@ -167,10 +167,10 @@ public class ProductAdminController {
 
 	@RequestMapping("/admin/product/findallkeyword/{pageNumber}")
 	public String findallkeyword(Model model, @RequestParam("Category_id") String Category_id,
-			@RequestParam("Trademark_id") String Trademark_id, @RequestParam("Status") String Status,
-			@RequestParam("Chip") String Chip, @RequestParam("Ram") String Ram, @RequestParam("Rom") String Rom,
-			@RequestParam("Resolution") String Resolution, @RequestParam("MinPrice") Integer unit_price,
-			@RequestParam("MaxPrice") Integer unit_price1, HttpServletRequest request, @PathVariable int pageNumber) {
+								 @RequestParam("Trademark_id") String Trademark_id, @RequestParam("Status") String Status,
+								 @RequestParam("Chip") String Chip, @RequestParam("Ram") String Ram, @RequestParam("Rom") String Rom,
+								 @RequestParam("Resolution") String Resolution, @RequestParam("MinPrice") Integer unit_price,
+								 @RequestParam("MaxPrice") Integer unit_price1, HttpServletRequest request, @PathVariable int pageNumber) {
 
 		List<Product> list = proservice.findByAllKeyWordAdmin(unit_price, unit_price1, Category_id, Trademark_id, Status, Chip,
 				Ram, Rom, Resolution);
@@ -351,8 +351,8 @@ public class ProductAdminController {
 			productDetail.setRam(pro.getRam());
 			productDetail.setRom(pro.getRom());
 
-            imageProductService.saveAll(images);
-            productDetailService.create(productDetail);
+			imageProductService.saveAll(images);
+			productDetailService.create(productDetail);
 			model.addAttribute("message", "Thêm mới thành công");
 			return "redirect:/admin/product/edit?product_id=" + pro.getProduct_id();
 		} else {
@@ -526,36 +526,36 @@ public class ProductAdminController {
 	}
 
 
-@GetMapping("/api/getProductDetail/{id}")
-public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
-	// Lấy sản phẩm từ cơ sở dữ liệu dựa trên ID
-	Product product = proservice.findById(id);
-	if (product != null) {
-		// Lấy thông tin chi tiết của sản phẩm từ bảng ProductDetail
-		ProductDetail productDetail = productDetailService.findByProductId(id);
+	@GetMapping("/api/getProductDetail/{id}")
+	public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
+		// Lấy sản phẩm từ cơ sở dữ liệu dựa trên ID
+		Product product = proservice.findById(id);
+		if (product != null) {
+			// Lấy thông tin chi tiết của sản phẩm từ bảng ProductDetail
+			ProductDetail productDetail = productDetailService.findByProductId(id);
 
-		// Lấy thông tin của loại sản phẩm từ bảng Category
-		Category category = product.getCategory();
-		if (category != null) {
-			product.setCategory(category);
-		}
-		// Lấy thông tin của màu sắc từ bảng Color
-		Color color = product.getColor();
-		if (color != null) {
-			product.setColor(color);
-		}
+			// Lấy thông tin của loại sản phẩm từ bảng Category
+			Category category = product.getCategory();
+			if (category != null) {
+				product.setCategory(category);
+			}
+			// Lấy thông tin của màu sắc từ bảng Color
+			Color color = product.getColor();
+			if (color != null) {
+				product.setColor(color);
+			}
 
-		// Lấy thông tin của kích thước từ bảng Size
-		Size size = product.getSize();
-		if (size != null) {
-			product.setSize(size);
-		}
+			// Lấy thông tin của kích thước từ bảng Size
+			Size size = product.getSize();
+			if (size != null) {
+				product.setSize(size);
+			}
 
-		return ResponseEntity.ok().body(product);
-	} else {
-		return ResponseEntity.notFound().build();
+			return ResponseEntity.ok().body(product);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
-}
 
 
 

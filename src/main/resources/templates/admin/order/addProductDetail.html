@@ -146,23 +146,23 @@
                         <td>[[${p.Size.name}]]</td>
                         <td>
 
-<!--                            <form id="add-to-order-form" method="post" th:action="@{|/admin/order/edit?order_id=${od?.Order_id}|}">-->
-<!--                                <input type="hidden" name="productId" th:value="${p.Product_id}" />-->
-<!--                                <button type="submit" class="btn btn-primary add-to-order">Thêm mới</button>-->
-<!--                                <p th:if="${ord != null}" th:text="'Order ID: ' + ${od.Order_id}"></p>-->
-<!--                            </form>-->
+                            <!--                            <form id="add-to-order-form" method="post" th:action="@{|/admin/order/edit?order_id=${od?.Order_id}|}">-->
+                            <!--                                <input type="hidden" name="productId" th:value="${p.Product_id}" />-->
+                            <!--                                <button type="submit" class="btn btn-primary add-to-order">Thêm mới</button>-->
+                            <!--                                <p th:if="${ord != null}" th:text="'Order ID: ' + ${od.Order_id}"></p>-->
+                            <!--                            </form>-->
 
-<!--                            <form id="add-to-order-form" method="post" th:action="@{|/admin/order/edit?order_id=${order_id}|}">-->
-<!--                                <input type="hidden" name="productId" th:value="${p.Product_id}" />-->
-<!--                                <button type="submit" class="btn btn-primary add-to-order">Thêm mới</button>-->
-<!--                                <p th:if="${ord != null}" th:text="'Order ID: ' + ${order_id}"></p>-->
-<!--                            </form>-->
+                            <!--                            <form id="add-to-order-form" method="post" th:action="@{|/admin/order/edit?order_id=${order_id}|}">-->
+                            <!--                                <input type="hidden" name="productId" th:value="${p.Product_id}" />-->
+                            <!--                                <button type="submit" class="btn btn-primary add-to-order">Thêm mới</button>-->
+                            <!--                                <p th:if="${ord != null}" th:text="'Order ID: ' + ${order_id}"></p>-->
+                            <!--                            </form>-->
                             <button type="button" class="btn btn-primary add-to-order" th:method="post"
                                     data-url="/admin/order/edit"
                                     th:data-product-id="${p.Product_id}">Thêm mới</button>
-<!--                            <button type="button" class="btn btn-primary add-to-order"-->
-<!--                                    data-url="/admin/order/edit/{{order_id}}"  -->
-<!--                            data-product-id="${p.Product_id}">Thêm mới</button>-->
+                            <!--                            <button type="button" class="btn btn-primary add-to-order"-->
+                            <!--                                    data-url="/admin/order/edit/{{order_id}}"  -->
+                            <!--                            data-product-id="${p.Product_id}">Thêm mới</button>-->
                         </td>
 
                     </tr>

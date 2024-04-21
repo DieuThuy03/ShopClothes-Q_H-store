@@ -84,7 +84,7 @@ public class ProductController {
 	@GetMapping("/product/list/page/{pageNumber}")
 	public String showProductPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
-		int pagesize = 9;
+		int pagesize = 12;
 		List<Product> list = (List<Product>) productService.findAll().stream()
 				.filter(product -> product.getQuantity() > 0)
 				.collect(Collectors.toList()).stream()

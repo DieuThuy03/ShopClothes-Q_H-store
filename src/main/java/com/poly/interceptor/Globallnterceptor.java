@@ -27,7 +27,7 @@ public class Globallnterceptor implements HandlerInterceptor {
 	// khai báo toàn chương trình hiển thị loại sản phẩm
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+						   ModelAndView modelAndView) throws Exception {
 		request.setAttribute("cates", categoryService.findAll());
 		request.setAttribute("trads", trademarkService.findAll());
 		request.setAttribute("size", sizeServices.findAll());
@@ -35,5 +35,5 @@ public class Globallnterceptor implements HandlerInterceptor {
 		request.setAttribute("materials", materialServices.findAll());
 	}
 
-	
+
 }
