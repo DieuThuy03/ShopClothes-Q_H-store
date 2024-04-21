@@ -58,10 +58,4 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 		return dao.findByProductID(productID);
 	}
 
-
-
-	@Override
-	public ProductDetail findByProductId(Integer productId) {
-		return dao.findByProductID(productId);
-	}
 }

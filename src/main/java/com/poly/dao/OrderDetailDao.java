@@ -4,15 +4,16 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.poly.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import org.springframework.stereotype.Repository;
+import com.poly.entity.Account;
+import com.poly.entity.Authority;
+import com.poly.entity.Category;
+import com.poly.entity.OrderDetail;
 
-@Repository
 public interface OrderDetailDao extends JpaRepository<OrderDetail, Integer>{
 	@Query("SELECT o FROM OrderDetail o WHERE o.order.Order_id = ?1")
 	List<OrderDetail> findByOrderID(Integer orderid);
@@ -29,7 +30,4 @@ public interface OrderDetailDao extends JpaRepository<OrderDetail, Integer>{
 
 	@Query("SELECT o FROM OrderDetail o WHERE o.order.Order_id = ?1 and o.product.Product_id = ?2")
 	OrderDetail findOneByOrderIdAndProductID(Integer orderID, Integer productID);
-
-	OrderDetail findByProduct(Product product);
-
 }

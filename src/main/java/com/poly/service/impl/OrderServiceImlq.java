@@ -36,9 +36,6 @@ public class OrderServiceImlq implements OrderService {
     @Autowired
 	ProductService productService;
 
-    @Autowired
-	ProductDao productDao;
-
 	@Override
 	@Transactional
 	public Order create(JsonNode orderData,String code) throws Throwable {
@@ -164,6 +161,7 @@ public class OrderServiceImlq implements OrderService {
 	}
 	@Override
 	public Order update(Order order) {
+		// TODO Auto-generated method stub
 		return dao.save(order);
 	}
 
@@ -181,54 +179,4 @@ public class OrderServiceImlq implements OrderService {
 	}
 
 
-	@Override
-	@Transactional
-	public void addProductToOrder(Order order, Product product, int quantity) {
-		// Kiểm tra xem sản phẩm đã có trong OrderDetail chưa
-		OrderDetail existingOrderDetail = findOrderDetailByOrderAndProduct(order, product);
-
-		if (existingOrderDetail == null) {
-			// Tạo một bản ghi mới cho sản phẩm trong OrderDetail
-			OrderDetail newOrderDetail = new OrderDetail();
-			newOrderDetail.setOrder(order);
-			newOrderDetail.setProduct(product);
-			newOrderDetail.setQuantity(quantity);
-			newOrderDetail.setPrice(product.getUnit_price() * quantity);
-			ddao.save(newOrderDetail);
-		} else {
-			// Sản phẩm đã có trong OrderDetail, cập nhật số lượng
-			int newQuantity = existingOrderDetail.getQuantity() + quantity;
-			existingOrderDetail.setQuantity(newQuantity);
-			existingOrderDetail.setPrice(product.getUnit_price() * newQuantity);
-			ddao.save(existingOrderDetail);
-		}
-
-		// Giảm số lượng của sản phẩm trong bảng Product
-		int remainingQuantity = product.getQuantity() - quantity;
-		if (remainingQuantity < 0) {
-			throw new RuntimeException("Không đủ hàng trong kho");
-		}
-		product.setQuantity(remainingQuantity);
-		productDao.save(product);
-	}
-
-	// Tìm kiếm OrderDetail theo Order và Product
-	private OrderDetail findOrderDetailByOrderAndProduct(Order order, Product product) {
-		List<OrderDetail> orderDetails = order.getOrderDetails();
-		for (OrderDetail orderDetail : orderDetails) {
-			if (orderDetail.getProduct().equals(product)) {
-				return orderDetail;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public Order findOrderById(Integer orderId) {
-		return dao.findById(orderId).orElse(null);
-	}
-	@Override
-	public void updateOrder(Order order) {
-		dao.save(order);
-	}
 }

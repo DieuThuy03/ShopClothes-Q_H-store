@@ -4,19 +4,22 @@ import java.util.List;
 
 import com.poly.dtos.BillDTO;
 import com.poly.dtos.FileDTO;
-import com.poly.entity.*;
+import com.poly.entity.Account;
+import com.poly.entity.OrderDetail;
+import com.poly.entity.Voucher;
 import com.poly.exceptions.MoneyNotEnoughException;
 import com.poly.mappers.JsonMapper;
-import com.poly.service.*;
-import com.poly.service.impl.ProductServiceImlq;
+import com.poly.service.OrderDetailService;
+import com.poly.service.ReportService;
+import com.poly.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.dao.OrderDao;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.poly.entity.Order;
+import com.poly.service.OrderService;
 
 @CrossOrigin("*")
 @RestController
@@ -32,9 +35,6 @@ public class OrderRestController {
 
     @Autowired
 	OrderDetailService orderDetailService;
-
-    @Autowired
-	ProductServiceImlq productService;
 
 	@GetMapping("/rest/orders")
 	public List<Order> getAll(){
@@ -124,15 +124,4 @@ public class OrderRestController {
 		FileDTO fileDTO = new FileDTO(pdfPath);
 		return fileDTO;
 	}
-
-
-
-
-
-
-
-//	@PostMapping("/rest/order/add")
-//	public String addOrder(){
-//
-//	}
 }

@@ -20,6 +20,4 @@ public interface ProductDetailService {
 
 	void deleteByProductID(Integer productID);
 	ProductDetail findByProductID(Integer productID);
-
-	public ProductDetail findByProductId(Integer productId);
 }

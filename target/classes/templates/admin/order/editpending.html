@@ -32,7 +32,7 @@
 
 							<div class="form-group col-sm-6">
 								<div class="thongtin">Tổng tiền</div>
-								<div name="price" class="form-control" readonly th:text="${#numbers.formatDecimal(ord.price, 2, 'COMMA', 0, 'POINT')} + ' đ'"></div>
+								<div name="price" class="form-control" readonly th:text="${#numbers.formatDecimal(ord.price, 2, 'COMMA', 1, 'POINT')} + ' đ'"></div>
 							</div>
 
 							<div class="form-group col-sm-6">
@@ -50,7 +50,7 @@
 							</div>
 							<div class="form-group col-sm-6">
 								<div class="thongtin">Tổng tiền cần phải trả</div>
-								<div class="form-control" readonly th:text="${#numbers.formatDecimal(ord.price - ord.voucher_price, 2, 'COMMA', 0, 'POINT')} + ' đ'"></div>
+								<div class="form-control" readonly th:text="${#numbers.formatDecimal(ord.price - ord.voucher_price, 2, 'COMMA', 1, 'POINT')} + ' đ'"></div>
 							</div>
 							<div class="form-group col-sm-6">
 								<div class="thongtin">Ghi chú</div>
@@ -92,12 +92,10 @@
 									<td><img th:src="@{|/assets/images/${odt.product.Image1}|}"
 											 style="width: 100px; height: 100px;"></td>
 									<td>
-										<input class="form-control input-quantity" style="width: 120px" type="number"
-											   th:value="${odt.Quantity}"
-											   th:attr="data-id=${odt.Orderdetail_id}">
+										<input class="form-control input-quantity" type="number" th:value="${odt.Quantity}" th:attr="data-id=${odt.Orderdetail_id}">
 									</td>
 									<td>[[${#numbers.formatDecimal(odt.Price , 0 ,
-										'COMMA',0,'POINT')}]] Đ</td>
+										'COMMA',2,'POINT')}]] Đ</td>
 									<td>
 										<button class="btn btn-danger btn-del-orderDetail" th:attr="data-id=${odt.Orderdetail_id}">
 											<b class="fa fa-trash"></b>

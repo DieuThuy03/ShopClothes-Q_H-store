@@ -104,7 +104,7 @@
 									<!--	--------------------Size------------------------------------------->
 									<div class="form-group col-sm-6">
 										<div>Size</div>
-										<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" >
+										<select name="size.Size_id"  data-live-search="true" class="form-group col-sm-12 selectpicker show-tick" style="height: 36px;" multiple="multiple">
 
 											<div class="form-group selectpicker show-tick" th:each="s,state:${size}">
 												<option th:value="${s.Size_id}" >[[${s.name}]]</option>

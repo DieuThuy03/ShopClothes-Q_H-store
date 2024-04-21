@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{user/acc/index ::dynamic(~{::main})}">
+	th:replace="~{user/acc/index ::dynamic(~{::main})}"
+>
 <main>
 	<div class="panel panel-info " >
-		
+
 		<div class="panel-heading text-center" style="font-style:oblique;font-variant: inherit;font-weight: bolder; ">Thông tin tài khoản</div>
 		<div class="panel-body">
 			<form th:action="@{/infonew}" method="post" modelAttribute="acc"
@@ -57,6 +58,6 @@
 			</form>
 		</div>
 	</div>
-	
+
 </main>
 </html>

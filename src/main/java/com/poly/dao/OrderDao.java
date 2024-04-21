@@ -13,9 +13,7 @@ import com.poly.entity.Authority;
 import com.poly.entity.Category;
 import com.poly.entity.Order;
 import com.poly.entity.Report;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface OrderDao extends JpaRepository<Order, Integer>{
 
 	@Query("SELECT o FROM Order o WHERE o.account.Username=?1 order by o.id desc ")
